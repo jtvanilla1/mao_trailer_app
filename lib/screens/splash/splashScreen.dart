@@ -10,11 +10,19 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+//Load app data for splash screen init
+  void load(){
+  print('loading data... transitioning to login screen');
+  //TODO: sharedpreferences for boolean: load tutorial pages or no
+  Navigator.pushReplacementNamed(context, '/login');
+
+}
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    //load();
   }
   @override
   Widget build(BuildContext context) {
@@ -33,18 +41,40 @@ class _SplashScreenState extends State<SplashScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  //TODO: get main icon
-                  Icons.error,
-                  color: appTheme().primaryColor,
-                  size: 170.0,
-                ),
-                Text("Mao Trailer", 
-                  style: TextStyle(
-                    //TODO : get fonts
-                    color: appTheme().primaryColor,
+                SizedBox(height: 200,), //top padding
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.topCenter,
+                    child: Column(
+                      children: <Widget>[
+                        //TODO: get and build loading animation here
+                        Icon(
+                          //TODO: get main icon
+                          Icons.error,
+                          color: appTheme().primaryColor,
+                          size: 170.0,
+                        ),
+                        Text("Mao Trailer", 
+                          style: TextStyle(
+                            //TODO : get fonts
+                            color: appTheme().primaryColor,
+                          ),
+                        ),
+                      ]
+                    ),
                   ),
                 ),
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: Text("Copyright 2007",
+                      style: TextStyle(
+                        color: Color(0xFFEC98A1)
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,) //bottom padding
               ]
 
             ),
