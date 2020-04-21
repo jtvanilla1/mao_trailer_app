@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -10,20 +11,43 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-//Load app data for splash screen init
-  void load(){
-  print('loading data... transitioning to login screen');
-  //TODO: sharedpreferences for boolean: load tutorial pages or no
-  Navigator.pushReplacementNamed(context, '/login');
+  Future<bool> _isFirstTimeOpened() async {
+    final prefs = await SharedPreferences.getInstance();
+    final firstTimeOpened = prefs.getBool('firstTimeOpened');
+    if(firstTimeOpened == null){ //if no recorded value for firstTimeOpened
+      prefs.setBool('firstTimeOpened', false); //set future value to false so getBoolFromSharedPref will return false from now on
+      return true;
+    }
+    return false; //should always return false if firstTimeOpened in sharedpreferences has a value
+  }
 
-}
+//Load app data for splash screen init
+  void loadIntroOrLogin() async {
+    print("checking if first time opened...");
+    bool firstTimeOpened = await _isFirstTimeOpened();
+    print("firstTimeOpened: $firstTimeOpened");
+    _routeToNextPage(firstTimeOpened);
+  }
+
+  void _routeToNextPage(bool firstTimeOpened) {
+    if (firstTimeOpened){
+      print("navigating to intro...");
+      Navigator.pushReplacementNamed(context, '/intro1');
+    }
+    else{
+      print("navigating to login...");
+      //TODO: remove hardcoded intro route
+      //Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/intro1');
+    }
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //load();
+    loadIntroOrLogin();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
           image: DecorationImage(
             //TODO: get background image
             image: AssetImage("assets/images/placeholder.PNG"),
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
           )
         ),
         child: Row(

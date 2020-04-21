@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 
-class Intro3Screen extends StatefulWidget {
-  const Intro3Screen({Key key}) : super(key: key);
+class Intro4Screen extends StatefulWidget {
+  const Intro4Screen({Key key}) : super(key: key);
 
   @override
-  _Intro3ScreenState createState() => _Intro3ScreenState();
+  _Intro4ScreenState createState() => _Intro4ScreenState();
 }
 
-class _Intro3ScreenState extends State<Intro3Screen> {
+class _Intro4ScreenState extends State<Intro4Screen> {
   void nextPage(){
     //TODO: implement same animation as PageView scroll right/left
     //TODO: consider not using pushReplacementRoute so slide left-right easily, then pop everything on push to login
-    print("navigating to intro4");
-    Navigator.pushReplacementNamed(context, '/intro4');
+    print("navigating to login");
+    //Navigator.pushReplacementNamed(context, '/login');
   }
 
 
@@ -40,7 +40,7 @@ class _Intro3ScreenState extends State<Intro3Screen> {
                     alignment: FractionalOffset.bottomCenter,
                     child: Column(
                       children: <Widget>[
-                        Text("INTRO 3", 
+                        Text("INTRO 4", 
                           style: TextStyle(
                             //TODO : get fonts
                             color: appTheme().primaryColor,
@@ -65,13 +65,13 @@ class _Intro3ScreenState extends State<Intro3Screen> {
                             Icon(
                               //TODO: get main icon
                               Icons.error,
-                              color: appTheme().primaryColor,
+                              color: appTheme().primaryColor.withOpacity(0.5),
                               size: 30.0,
                             ),
                             Icon(
                               //TODO: get main icon
                               Icons.error,
-                              color: appTheme().primaryColor.withOpacity(0.5),
+                              color: appTheme().primaryColor,
                               size: 30.0,
                             ),
                           ],
