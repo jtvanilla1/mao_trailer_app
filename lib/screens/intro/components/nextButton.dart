@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 
-Container nextButton(BuildContext context, String route){
+Container nextButton(BuildContext context, PageController controller){
   return Container(
     margin: const EdgeInsets.all(30.0),
     padding: const EdgeInsets.all(10.0),
@@ -16,10 +16,9 @@ Container nextButton(BuildContext context, String route){
       ),
     child: RawMaterialButton(
     onPressed: (){
-      //TODO: implement same animation as PageView scroll right/left
-      //TODO: consider not using pushReplacementRoute so slide left-right easily, then pop everything on push to login
-      print("navigating to $route");
-      Navigator.pushReplacementNamed(context, '$route');
+      print("navigating to next page");
+      //Navigator.pushReplacementNamed(context, '$route');
+      controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
     },
       child: Row(
         children: <Widget>[

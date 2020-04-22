@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,13 +31,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _routeToNextPage(bool firstTimeOpened) {
+
     if (firstTimeOpened){
       print("navigating to intro...");
-      Navigator.pushReplacementNamed(context, '/intro1');
+      Navigator.pushReplacementNamed(context, '/intro');
     }
     else{
       print("navigating to login...");
-      Navigator.pushReplacementNamed(context, '/login');
+      //Navigator.pushReplacementNamed(context, '/login');
+      //TODO: remove hardcoded push to intro1
+      Navigator.pushReplacementNamed(context, '/intro');
     }
   }
 

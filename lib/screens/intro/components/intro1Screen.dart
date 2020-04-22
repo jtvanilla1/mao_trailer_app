@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:mao_trailer_app/screens/intro/components/nextButton.dart';
 import 'package:mao_trailer_app/screens/intro/components/imagebg.dart';
+import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/screens/intro/components/pageIcons.dart';
 
+class Intro1Screen extends StatefulWidget {
+  final PageController controller;
 
-class Intro2Screen extends StatefulWidget {
-  const Intro2Screen({Key key}) : super(key: key);
+  const Intro1Screen({Key key, this.controller}) : super(key: key);
 
   @override
-  _Intro2ScreenState createState() => _Intro2ScreenState();
+  _Intro1ScreenState createState() => _Intro1ScreenState();
 }
 
-class _Intro2ScreenState extends State<Intro2Screen> {
-  List<Color> listOfColors = [Color(0xFFAE9632).withOpacity(0.8),Color(0xFFAE9632).withOpacity(0.5), Color(0x00000000)];
+class _Intro1ScreenState extends State<Intro1Screen> {
+  List<Color> listOfColors = [Color(0xFFB62E59).withOpacity(0.5), Color(0xFF813F2E), Color(0xFF813F2E).withOpacity(0.5), Color(0x00000000)];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          imagebg('intro2.png'),
+          imagebg('intro1.png'),
           Container( //gradient
             decoration:gradientbg(listOfColors),
             child: Row( //details
@@ -36,7 +37,7 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                         alignment: FractionalOffset.bottomCenter,
                         child: Column(
                           children: <Widget>[
-                            Text("INTRO 2", 
+                            Text("Know the movie is not worth Watching", 
                               style: TextStyle(
                                 //TODO : get fonts
                                 color: appTheme().primaryColor,
@@ -44,9 +45,9 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                               ),
                             ),
                             SizedBox(height: 20,), // spacing between title and icons
-                            pageIcons(1),
+                            pageIcons(0),
                             SizedBox(height: 20,), // spacing between icons and
-                            nextButton(context, '/intro3'),
+                            nextButton(context, widget.controller),
                           ]
                         ),
                       ),

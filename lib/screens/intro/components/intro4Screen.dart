@@ -6,7 +6,9 @@ import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/screens/intro/components/pageIcons.dart';
 
 class Intro4Screen extends StatefulWidget {
-  const Intro4Screen({Key key}) : super(key: key);
+  final PageController controller;
+
+  const Intro4Screen({Key key, this.controller}) : super(key: key);
 
   @override
   _Intro4ScreenState createState() => _Intro4ScreenState();

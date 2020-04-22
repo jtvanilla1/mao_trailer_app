@@ -6,7 +6,9 @@ import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/screens/intro/components/pageIcons.dart';
 
 class Intro3Screen extends StatefulWidget {
-  const Intro3Screen({Key key}) : super(key: key);
+  final PageController controller;
+
+  const Intro3Screen({Key key, this.controller}) : super(key: key);
 
   @override
   _Intro3ScreenState createState() => _Intro3ScreenState();
@@ -45,7 +47,7 @@ class _Intro3ScreenState extends State<Intro3Screen> {
                             SizedBox(height: 20,), // spacing between title and icons
                             pageIcons(2),
                             SizedBox(height: 20,), // spacing between icons and
-                            nextButton(context, '/intro4'),
+                            nextButton(context, widget.controller),
                           ]
                         ),
                       ),
