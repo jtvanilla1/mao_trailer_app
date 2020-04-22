@@ -36,9 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else{
       print("navigating to login...");
-      //TODO: remove hardcoded intro route
-      //Navigator.pushReplacementNamed(context, '/login');
-      Navigator.pushReplacementNamed(context, '/intro1');
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
