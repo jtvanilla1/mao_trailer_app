@@ -128,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future <Widget> _buildRememberMeCheckbox() async {
-    bool _rememberMe = await _rememberMeSP();
+  Widget _buildRememberMeCheckbox() {
+    bool _rememberMe = _rememberMeSP();
     return Container(
         child: Row(
       children: <Widget>[
