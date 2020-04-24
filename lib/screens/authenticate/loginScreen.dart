@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:mao_trailer_app/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,32 +11,28 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   List<Color> listOfColors = [
     Color(0xFFB62E59).withOpacity(0.5),
     Color(0x00000000)
   ];
-
+  final AuthService _auth = AuthService();
 
   Future<bool> _rememberMeSP([bool changeValue]) async {
     final prefs = await SharedPreferences.getInstance();
     final rememberMe = prefs.getBool('rememberMe');
 
-
-    if(rememberMe == null){ //if no recorded value for firstTimeOpened
+    if (rememberMe == null) {
+      //if no recorded value for firstTimeOpened
       prefs.setBool('rememberMe', false); //if null, set to false
     }
-    if(changeValue != null){ //if new value passed, set new value and return
+    if (changeValue != null) {
+      //if new value passed, set new value and return
       prefs.setBool('rememberMe', changeValue);
       return changeValue;
     }
 
     return rememberMe; //always return current value
   }
-
-
-
-
 
   Widget _buildEmailTF() {
     return Column(
@@ -125,58 +122,63 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
   Widget _rememberMeCheckbox(bool rememberMeSP) {
-
     return Container(
-        child: Row(
-      children: <Widget>[
-        Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.white),
-          child: Checkbox(
-            value: rememberMeSP,
-            checkColor: Colors.green,
-            activeColor: Colors.white,
-            onChanged: (value) => _rememberMeSP(value),
+      child: Row(
+        children: <Widget>[
+          Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: rememberMeSP,
+              checkColor: Colors.green,
+              activeColor: Colors.white,
+              onChanged: (value) => _rememberMeSP(value), //update shared preferences
+            ),
           ),
-        ),
-        Text(
-          'Remember me',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'OpenSans',
+          Text(
+            'Remember me',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
           ),
-        ),
-      ],
-    ));
-  }
-  
-  FutureBuilder _buildRememberMeCheckbox(){
-    return FutureBuilder<bool>(
-      future: _rememberMeSP(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
-        Widget checkbox;
-        
-        if (snapshot.hasData) {
-          checkbox = _rememberMeCheckbox(snapshot.data);
-        }
-        else {
-          checkbox = _rememberMeCheckbox(false);
-        }
-        return checkbox;
-
-      },
+        ],
+      ),
     );
   }
 
-  
+  FutureBuilder _buildRememberMeCheckbox() {
+    return FutureBuilder<bool>(
+      future: _rememberMeSP(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        Widget checkbox;
+
+        if (snapshot.hasData) {
+          checkbox = _rememberMeCheckbox(snapshot.data);
+        } else {
+          checkbox = _rememberMeCheckbox(false);
+        }
+        return checkbox;
+      },
+    );
+  }
 
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
-        onPressed: () => print("login button pressed"),
+        onPressed: () async {
+          print("login button pressed");
+          dynamic result = await _auth.signInAnon();
+          if (result == null){
+            print("error signing in");
+          }
+          else {
+            print("signed in");
+            print(result);
+          }
+        },
         elevation: 5.0,
         padding: EdgeInsets.all(15.0),
         shape:

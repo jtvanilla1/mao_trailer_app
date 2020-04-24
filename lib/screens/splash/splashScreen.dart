@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mao_trailer_app/services/auth.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -38,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen> {
     else{
       print("navigating to login...");
       //Navigator.pushReplacementNamed(context, '/login');
-      //TODO: remove hardcoded push to intro1
-      Navigator.pushReplacementNamed(context, '/intro');
+      //TODO: remove hardcoded push to wrapper
+      Navigator.pushReplacementNamed(context, '/wrap');
     }
   }
 
@@ -51,59 +54,62 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            //TODO: get background image
-            image: AssetImage("assets/images/placeholder.PNG"),
-            fit: BoxFit.cover,
-          )
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 200,), //top padding
-                Expanded(
-                  child: Align(
-                    alignment: FractionalOffset.topCenter,
-                    child: Column(
-                      children: <Widget>[
-                        //TODO: get and build loading animation here
-                        Icon(
-                          //TODO: get main icon
-                          Icons.error,
-                          color: appTheme().primaryColor,
-                          size: 170.0,
-                        ),
-                        Text("Mao Trailer", 
-                          style: TextStyle(
-                            //TODO : get fonts
+    return StreamProvider<FirebaseUser>.value(
+      value: AuthService().user,
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              //TODO: get background image
+              image: AssetImage("assets/images/placeholder.PNG"),
+              fit: BoxFit.cover,
+            )
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 200,), //top padding
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.topCenter,
+                      child: Column(
+                        children: <Widget>[
+                          //TODO: get and build loading animation here
+                          Icon(
+                            //TODO: get main icon
+                            Icons.error,
                             color: appTheme().primaryColor,
+                            size: 170.0,
                           ),
-                        ),
-                      ]
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    child: Text("Copyright 2007",
-                      style: TextStyle(
-                        color: Color(0xFFEC98A1)
+                          Text("Mao Trailer", 
+                            style: TextStyle(
+                              //TODO : get fonts
+                              color: appTheme().primaryColor,
+                            ),
+                          ),
+                        ]
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20,) //bottom padding
-              ]
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.bottomCenter,
+                      child: Text("Copyright 2007",
+                        style: TextStyle(
+                          color: Color(0xFFEC98A1)
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20,) //bottom padding
+                ]
 
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

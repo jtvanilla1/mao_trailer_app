@@ -3,7 +3,6 @@ import 'package:mao_trailer_app/screens/intro/components/intro1Screen.dart';
 import 'package:mao_trailer_app/screens/intro/components/intro2Screen.dart';
 import 'package:mao_trailer_app/screens/intro/components/intro3Screen.dart';
 import 'package:mao_trailer_app/screens/intro/components/intro4Screen.dart';
-import 'package:mao_trailer_app/screens/login/loginScreen.dart';
 
 class IntroPages extends StatefulWidget {
   @override

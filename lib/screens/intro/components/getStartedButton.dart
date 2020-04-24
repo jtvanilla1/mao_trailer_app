@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 
-Container getStartedButton(BuildContext context, String route){
+Container getStartedButton(BuildContext context){
   return Container(
     margin: const EdgeInsets.all(30.0),
     padding: const EdgeInsets.all(10.0),
@@ -19,8 +19,8 @@ Container getStartedButton(BuildContext context, String route){
       onPressed: (){
         //TODO: implement same animation as PageView scroll right/left
         //TODO: consider not using pushReplacementRoute so slide left-right easily, then pop everything on push to login
-        print("navigating to $route");
-        Navigator.pushReplacementNamed(context, '$route');
+        print("navigating to wrapper");
+        Navigator.pushReplacementNamed(context, '/wrap');
       },
       child: Row(
         children: <Widget>[

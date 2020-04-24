@@ -47,7 +47,7 @@ class _Intro4ScreenState extends State<Intro4Screen> {
                             SizedBox(height: 20,), // spacing between title and icons
                             pageIcons(3),
                             SizedBox(height: 20,), // spacing between icons and
-                            getStartedButton(context, '/login'),
+                            getStartedButton(context),
                           ]
                         ),
                       ),

@@ -1,16 +1,18 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:mao_trailer_app/screens/splash/splashScreen.dart';
-import 'package:mao_trailer_app/screens/intro/introPages.dart';
-import 'package:mao_trailer_app/screens/login/loginScreen.dart';
-import 'package:mao_trailer_app/screens/movies/moviesScreen.dart';
-import 'package:mao_trailer_app/screens/tv/tvScreen.dart';
-import 'package:mao_trailer_app/screens/profile/profileScreen.dart';
-import 'package:mao_trailer_app/screens/profile/settingsScreen.dart';
-import 'package:mao_trailer_app/screens/error/errorScreen.dart';
+import 'screens/splash/splashScreen.dart';
+import 'screens/intro/introPages.dart';
+import 'screens/authenticate/loginScreen.dart';
+import 'screens/movies/moviesScreen.dart';
+import 'screens/tv/tvScreen.dart';
+import 'screens/profile/profileScreen.dart';
+import 'screens/profile/settingsScreen.dart';
+import 'screens/error/errorScreen.dart';
+import 'screens/wrapper.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   "/splash": (BuildContext context) => SplashScreen(),
+  "/wrap": (BuildContext context) => Wrapper(),
   "/intro": (BuildContext context) => IntroPages(),
   "/login": (BuildContext context) => LoginScreen(),
   "/movies": (BuildContext context) => MoviesScreen(),
