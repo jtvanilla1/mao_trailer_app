@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

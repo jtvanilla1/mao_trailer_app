@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -9,11 +10,35 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   List<Color> listOfColors = [
     Color(0xFFB62E59).withOpacity(0.5),
     Color(0x00000000)
   ];
-  bool _rememberMe = false;
+
+  Future<bool> _rememberMeSP([bool changeValue]) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _rememberSP;
+
+    if (changeValue == null){ //if function called but not changed, get value from SP
+      _rememberSP = prefs.getBool('rememberMe');
+    }
+    if(changeValue != null){ //if function called to change, set SP to new value
+      _rememberSP = changeValue;
+      prefs.setBool('rememberMe', changeValue);
+    }
+
+    if(_rememberSP == null){ //if no value set, default to false
+      prefs.setBool('rememberMe', false);
+      _rememberSP = false;
+    }
+
+    return _rememberSP; //always return current value
+  }
+
+
+
+
 
   Widget _buildEmailTF() {
     return Column(
@@ -103,7 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildRememberMeCheckbox() {
+  Future <Widget> _buildRememberMeCheckbox() async {
+    bool _rememberMe = await _rememberMeSP();
     return Container(
         child: Row(
       children: <Widget>[
@@ -113,11 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
             value: _rememberMe,
             checkColor: Colors.green,
             activeColor: Colors.white,
-            onChanged: (value) {
-              setState(() {
-                _rememberMe = value;
-              });
-            },
+            onChanged: (value) => _rememberMeSP(value),
           ),
         ),
         Text(

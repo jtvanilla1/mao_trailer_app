@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "924857355971",
+    "firebase_url": "https://mao-trailer-app.firebaseio.com",
+    "project_id": "mao-trailer-app",
+    "storage_bucket": "mao-trailer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924857355971:android:605be037be858b9709dc76",
+        "android_client_info": {
+          "package_name": "com.example.mao_trailer_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924857355971-0koatkabv3534elfirk5rvkudf9inj63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD73wsUzAOIAf-mOs5gtdLYzPDKzxjEezw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924857355971-0koatkabv3534elfirk5rvkudf9inj63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
