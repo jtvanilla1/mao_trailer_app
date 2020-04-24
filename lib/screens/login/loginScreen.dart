@@ -16,24 +16,21 @@ class _LoginScreenState extends State<LoginScreen> {
     Color(0x00000000)
   ];
 
+
   Future<bool> _rememberMeSP([bool changeValue]) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _rememberSP;
+    final prefs = await SharedPreferences.getInstance();
+    final rememberMe = prefs.getBool('rememberMe');
 
-    if (changeValue == null){ //if function called but not changed, get value from SP
-      _rememberSP = prefs.getBool('rememberMe');
+
+    if(rememberMe == null){ //if no recorded value for firstTimeOpened
+      prefs.setBool('rememberMe', false); //if null, set to false
     }
-    if(changeValue != null){ //if function called to change, set SP to new value
-      _rememberSP = changeValue;
+    if(changeValue != null){ //if new value passed, set new value and return
       prefs.setBool('rememberMe', changeValue);
+      return changeValue;
     }
 
-    if(_rememberSP == null){ //if no value set, default to false
-      prefs.setBool('rememberMe', false);
-      _rememberSP = false;
-    }
-
-    return _rememberSP; //always return current value
+    return rememberMe; //always return current value
   }
 
 
@@ -128,15 +125,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildRememberMeCheckbox() {
-    bool _rememberMe = _rememberMeSP();
+
+  Widget _rememberMeCheckbox(bool rememberMeSP) {
+
     return Container(
         child: Row(
       children: <Widget>[
         Theme(
           data: ThemeData(unselectedWidgetColor: Colors.white),
           child: Checkbox(
-            value: _rememberMe,
+            value: rememberMeSP,
             checkColor: Colors.green,
             activeColor: Colors.white,
             onChanged: (value) => _rememberMeSP(value),
@@ -152,6 +150,26 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     ));
   }
+  
+  FutureBuilder _buildRememberMeCheckbox(){
+    return FutureBuilder<bool>(
+      future: _rememberMeSP(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
+        Widget checkbox;
+        
+        if (snapshot.hasData) {
+          checkbox = _rememberMeCheckbox(snapshot.data);
+        }
+        else {
+          checkbox = _rememberMeCheckbox(false);
+        }
+        return checkbox;
+
+      },
+    );
+  }
+
+  
 
   Widget _buildLoginBtn() {
     return Container(
