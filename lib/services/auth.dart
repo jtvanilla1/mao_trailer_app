@@ -4,10 +4,19 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //sign in anon
-  Future signInAnon() async {
-    try{
-      AuthResult result = await _auth.signInAnonymously();
+  //auth change user stream
+  Stream<FirebaseUser> get user {
+    return _auth.onAuthStateChanged;
+  }
+
+  //sign in google/pass
+
+  //sign in email/pass
+
+  //register with email/pass
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       return user;
     } catch(e) {
@@ -16,12 +25,14 @@ class AuthService {
     }
   }
 
-  //sign in google/pass
-
-  //sign in email/pass
-
-  //register with email/pass
-
   //sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch(e) {
+      print("error signing out: ${e.toString()}");
+      return null;
+    }
+  }
 
 }

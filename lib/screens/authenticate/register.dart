@@ -1,56 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/gradientbg.dart';
-import 'package:mao_trailer_app/screens/authenticate/register.dart';
 import 'package:mao_trailer_app/services/auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'register.dart';
 
-class LoginScreen extends StatefulWidget {
+class Register extends StatefulWidget {
 
   final Function toggleView;
-  LoginScreen({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-
-  //list of colors
+class _RegisterState extends State<Register> {
+  //colors
   List<Color> listOfColors = [
     Color(0xFFB62E59).withOpacity(0.5),
     Color(0x00000000)
   ];
 
-  //authService
-  final AuthService _auth = AuthService();
-
-  //formkey
-  final _formkey = GlobalKey<FormState>();
-
-  //textfield state
+  //text field state
   String email = '';
   String password = '';
   String error = '';
 
+  //auth
+  final AuthService _auth = AuthService();
 
-
-  Future<bool> _rememberMeSP([bool changeValue]) async {
-    final prefs = await SharedPreferences.getInstance();
-    final rememberMe = prefs.getBool('rememberMe');
-
-    if (rememberMe == null) {
-      //if no recorded value for firstTimeOpened
-      prefs.setBool('rememberMe', false); //if null, set to false
-    }
-    if (changeValue != null) {
-      //if new value passed, set new value and return
-      prefs.setBool('rememberMe', changeValue);
-      return changeValue;
-    }
-
-    return rememberMe; //always return current value
-  }
+  //formkey
+  final _formkey = GlobalKey<FormState>();
 
   Widget _buildEmailTF() {
     return Column(
@@ -68,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           height: 60.0,
           child: TextFormField(
+            validator: (val) => val.isEmpty ? 'Enter an email' : null,
             onChanged: (val) {
               setState(() => email = val);
             },
@@ -107,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           height: 60.0,
           child: TextFormField(
+            validator: (val) => val.length < 6 ? 'Enter a password of length 6 or more' : null,
             onChanged: (val) {
               setState(() => password = val);
             },
@@ -130,68 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: FlatButton(
-        onPressed: () => print("forgot button pressed"),
-        child: Text(
-          'Forgot Password?',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _rememberMeCheckbox(bool rememberMeSP) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: rememberMeSP,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMeSP(value);
-                });
-              }, //update shared preferences
-            ),
-          ),
-          Text(
-            'Remember me',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  FutureBuilder _buildRememberMeCheckbox() {
-    return FutureBuilder<bool>(
-      future: _rememberMeSP(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        Widget checkbox;
-
-        if (snapshot.hasData) {
-          checkbox = _rememberMeCheckbox(snapshot.data);
-        } else {
-          checkbox = _rememberMeCheckbox(false);
-        }
-        return checkbox;
-      },
-    );
-  }
-
-  Widget _buildLoginBtn() {
+  Widget _buildRegisterBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -211,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         color: Colors.white,
         child: Text(
-          'LOGIN',
+          'Register',
           style: TextStyle(
             color: Colors.black,
             letterSpacing: 1.5,
@@ -224,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildRegisterBtn() {
+  Widget _buildLogInBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -238,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         color: Colors.white,
         child: Text(
-          'Register',
+          'LOGIN',
           style: TextStyle(
             color: Colors.black,
             letterSpacing: 1.5,
@@ -265,13 +183,13 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 120.0),
-              child: Form (
+              child: Form(
                 key: _formkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Sign In',
+                      'Register',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -282,18 +200,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     _buildEmailTF(),
                     SizedBox(height: 30.0),
                     _buildPasswordTF(),
-                    Row(
-                      children: <Widget>[
-                        _buildRememberMeCheckbox(),
-                        SizedBox(width: 25),
-                        _buildForgotPasswordBtn(),
-                      ],
-                    ),
                     SizedBox(
                       height: 40,
-                      child: Text(error, style: TextStyle(color: Colors.white, fontSize: 14),)),
-                    _buildLoginBtn(),
+                      child: Text(error, style: TextStyle(color: Colors.white, fontSize: 14),)
+                    ),
+                    SizedBox(height: 48.0,),
                     _buildRegisterBtn(),
+                    _buildLogInBtn(),
                     
                   ],
                 ),

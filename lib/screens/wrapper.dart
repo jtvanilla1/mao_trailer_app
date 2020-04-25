@@ -7,7 +7,7 @@ import 'home/home.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
+    print('retrieving firebase user...');
     final user = Provider.of<FirebaseUser>(context);
     print(user);
 

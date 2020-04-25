@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/authenticate/loginScreen.dart';
+import 'package:mao_trailer_app/screens/authenticate/register.dart';
 
 //TODO: listen for auth changes, loginScreen if not logged in, else transition to homescreen
 
@@ -9,10 +10,18 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+
+  bool showSignIn = true;
+
+  void toggleView() => setState(()  => showSignIn = !showSignIn);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: LoginScreen(),
-    );
+    if (showSignIn) {
+      return LoginScreen(toggleView: toggleView);
+    }
+    else {
+      return Register(toggleView: toggleView);
+    }
   }
 }
