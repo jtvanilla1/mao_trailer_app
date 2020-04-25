@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         onPressed: () async {
           if (_formkey.currentState.validate()){
-            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+            dynamic result = await _auth.logInWithEmailAndPassword(email, password);
             print('result: $result');
             if (result == null){
               setState(() => error = 'please supply a valid email/password that has not already been registered');
@@ -291,7 +291,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(
                       height: 40,
-                      child: Text(error, style: TextStyle(color: Colors.white, fontSize: 14),)),
+                      child: Text(error, style: TextStyle(color: Colors.white, fontSize: 14),)
+                    ),
                     _buildLoginBtn(),
                     _buildRegisterBtn(),
                     
