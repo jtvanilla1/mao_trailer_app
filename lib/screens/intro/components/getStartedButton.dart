@@ -17,8 +17,6 @@ Container getStartedButton(BuildContext context){
       ),
     child: RawMaterialButton(
       onPressed: (){
-        //TODO: implement same animation as PageView scroll right/left
-        //TODO: consider not using pushReplacementRoute so slide left-right easily, then pop everything on push to login
         print("navigating to wrapper");
         Navigator.pushReplacementNamed(context, '/wrap');
       },

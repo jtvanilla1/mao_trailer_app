@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/services/auth.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -40,8 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else{
       print("navigating to login...");
-      //Navigator.pushReplacementNamed(context, '/login');
-      //TODO: remove hardcoded push to wrapper
       Navigator.pushReplacementNamed(context, '/wrap');
     }
   }

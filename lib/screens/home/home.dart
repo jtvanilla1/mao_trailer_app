@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/services/auth.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 
+import 'movies/moviesScreen.dart';
+import 'profile/profileScreen.dart';
+import 'tv/tvScreen.dart';
+
 class Home extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
+    final controller = PageController(initialPage: 0);
 
-    //TODO: build PageView for all app pages running through this Home() widget? or navigate? which works better? -> research
-    return Scaffold(
-      backgroundColor: appTheme().primaryColorDark,
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: appTheme().primaryColor,
-        elevation: 0,
-        actions: <Widget>[
-          FlatButton.icon(
-            label: Text('Logout'),
-            icon: Icon(Icons.person),
-            onPressed: () async {
-              await _auth.signOut();
-              
-            },
-          ),
-        ]
-      ),
+    return Stack(
+      children: <Widget>[
+        PageView(
+          controller: controller,
+          children: <Widget>[
+          MoviesScreen(controller: controller),
+          TvScreen(controller: controller),
+          ProfileScreen(controller: controller)
+          ],
+        ),
+      ] 
     );
   }
 }
+

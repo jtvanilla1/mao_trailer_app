@@ -1,12 +1,10 @@
 import 'package:flutter/widgets.dart';
+import 'package:mao_trailer_app/screens/home/searchresults/searchresults.dart';
 
 import 'screens/splash/splashScreen.dart';
 import 'screens/intro/introPages.dart';
 import 'screens/authenticate/loginScreen.dart';
-import 'screens/movies/moviesScreen.dart';
-import 'screens/tv/tvScreen.dart';
-import 'screens/profile/profileScreen.dart';
-import 'screens/profile/settingsScreen.dart';
+import 'screens/home/profile/settingsScreen.dart';
 import 'screens/error/errorScreen.dart';
 import 'screens/wrapper.dart';
 
@@ -15,9 +13,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   "/wrap": (BuildContext context) => Wrapper(),
   "/intro": (BuildContext context) => IntroPages(),
   "/login": (BuildContext context) => LoginScreen(),
-  "/movies": (BuildContext context) => MoviesScreen(),
-  "/tv": (BuildContext context) => TvScreen(),
-  "/profile": (BuildContext context) => ProfileScreen(),
   "/settings": (BuildContext context) => SettingsScreen(),
-  "/error": (BuildContext context) => ErrorScreen()
+  "/error": (BuildContext context) => ErrorScreen(),
+  "/search": (BuildContext context) => SearchResults()
 };

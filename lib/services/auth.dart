@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   //auth change user stream
   Stream<FirebaseUser> get user {
@@ -10,6 +12,26 @@ class AuthService {
   }
 
   //sign in google/pass
+  Future googleSignIn() async {
+    //TODO: fix bug in google sign in
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      idToken: googleAuth.accessToken, 
+      accessToken: googleAuth.idToken
+    );
+    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+    assert(user.email !=null);
+    assert(user.displayName !=null);
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() !=null);
+
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert (user.uid == currentUser.uid);
+
+    return user;
+
+  }
 
   //sign in email/pass
   Future logInWithEmailAndPassword(String email, String password) async {
@@ -46,3 +68,5 @@ class AuthService {
   }
 
 }
+
+final AuthService authService = AuthService();

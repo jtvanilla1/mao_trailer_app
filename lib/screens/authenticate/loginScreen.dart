@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mao_trailer_app/components/gradientbg.dart';
-import 'package:mao_trailer_app/screens/authenticate/register.dart';
 import 'package:mao_trailer_app/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'register.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -191,11 +192,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLoginBtn() {
+  Widget _buildSignInBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       width: double.infinity,
-      child: RaisedButton(
+
+      child: SignInButton(
+        Buttons.Email,
         onPressed: () async {
           if (_formkey.currentState.validate()){
             dynamic result = await _auth.logInWithEmailAndPassword(email, password);
@@ -205,48 +208,46 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           }
         },
-        elevation: 5.0,
         padding: EdgeInsets.all(15.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        color: Colors.white,
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Colors.black,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+        
+
       ),
     );
   }
 
+Widget _buildSignInWithGoogleBtn() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 15.0),
+      width: double.infinity,
+      child: SignInButton(
+        Buttons.Google,
+        onPressed: () async {
+          dynamic result = await _auth.googleSignIn();
+          print('Google result: $result');
+          if (result == null){
+            setState(() => error = 'please supply a valid email/password that has not already been registered');
+          }
+        },
+        padding: EdgeInsets.all(15.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      ),
+    );
+  }
+
+
   Widget _buildRegisterBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       width: double.infinity,
-      child: RaisedButton(
+      child: SignInButton(
+        Buttons.Email,
         onPressed: ()  {
           widget.toggleView();
         },
-        elevation: 5.0,
         padding: EdgeInsets.all(15.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        color: Colors.white,
-        child: Text(
-          'Register',
-          style: TextStyle(
-            color: Colors.black,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        text: 'Register with Email',
       ),
     );
   }
@@ -293,7 +294,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 40,
                       child: Text(error, style: TextStyle(color: Colors.white, fontSize: 14),)
                     ),
-                    _buildLoginBtn(),
+                    _buildSignInBtn(),
+                    _buildSignInWithGoogleBtn(),
                     _buildRegisterBtn(),
                     
                   ],
