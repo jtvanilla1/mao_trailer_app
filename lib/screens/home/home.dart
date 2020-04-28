@@ -1,31 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:mao_trailer_app/screens/home/components/bottomNavBar.dart';
 import 'package:mao_trailer_app/services/auth.dart';
-import 'package:mao_trailer_app/theme/style.dart';
 
 import 'movies/moviesScreen.dart';
 import 'profile/profileScreen.dart';
 import 'tv/tvScreen.dart';
+import 'components/topNavBar.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+
+
+  int bottomSelectedIndex = 0;
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        pageChanged(index);
+      },
+      children: <Widget>[
+        MoviesScreen(),
+        TvScreen(),
+        ProfileScreen(),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+    });
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controller = PageController(initialPage: 0);
-
-    return Stack(
-      children: <Widget>[
-        PageView(
-          controller: controller,
-          children: <Widget>[
-          MoviesScreen(controller: controller),
-          TvScreen(controller: controller),
-          ProfileScreen(controller: controller)
-          ],
-        ),
-      ] 
+    return Scaffold(
+      appBar: buildTopNavBar(context),
+      body: buildPageView(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomSelectedIndex,
+        backgroundColor: Colors.orange,
+        onTap: (index) {
+          bottomTapped(index);
+        },
+        items: buildBottomNavBarItems(),
+      ),
     );
   }
 }
-
