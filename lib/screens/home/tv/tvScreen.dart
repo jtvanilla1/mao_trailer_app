@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mao_trailer_app/screens/home/components/horizontalBtnList.dart';
+import 'package:mao_trailer_app/screens/home/components/verticalBtnList.dart';
 import 'package:mao_trailer_app/theme/style.dart';
+
 
 class TvScreen extends StatelessWidget {
 
@@ -11,25 +14,24 @@ class TvScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appTheme().primaryColorDark,
-      body: Stack(
-        children: <Widget> [
-          //Title: "NOW"
-          Text('NOW'),
+      //Action Bar
+      
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget> [
+            //Title: "NOW"
+            Text('NOW', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 
-          //Scrollable Row of Button widgets
-          //MovieList(),
+            //Scrollable Row of Button widgets
+            HorizontalBtnList(),
 
-          //Title: "Popular"
+            //Title: "Popular"
+            Text('POPULAR', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            //Scrollable Column of Button widgets plus "see more" buttton that recursively adds more movies to the list
+            VerticalBtnList(),
 
-          //Scrollable Row of Button widgets plus "see more" buttton that recursively adds more movies to the list
-          //MovieList()
-
-          //Scrollable Row of Button widgets
-          //MovieList()
-
-          //Bottom Navbar
-          
-        ]
+          ]
+        ),
       ),
     );
   }

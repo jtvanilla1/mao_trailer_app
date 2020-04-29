@@ -39,7 +39,6 @@ class _Intro1ScreenState extends State<Intro1Screen> {
                           children: <Widget>[
                             Text("Know the movie is not worth Watching", 
                               style: TextStyle(
-                                //TODO : get fonts
                                 color: appTheme().primaryColor,
                                 fontSize: 20,
                               ),

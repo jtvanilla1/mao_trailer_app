@@ -40,7 +40,6 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                           children: <Widget>[
                             Text("INTRO 2", 
                               style: TextStyle(
-                                //TODO : get fonts
                                 color: appTheme().primaryColor,
                                 fontSize: 20,
                               ),

@@ -39,7 +39,6 @@ class _Intro3ScreenState extends State<Intro3Screen> {
                           children: <Widget>[
                             Text("INTRO 3", 
                               style: TextStyle(
-                                //TODO : get fonts
                                 color: appTheme().primaryColor,
                                 fontSize: 20,
                               ),

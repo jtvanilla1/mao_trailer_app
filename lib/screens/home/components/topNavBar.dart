@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 AppBar buildTopNavBar(BuildContext context) {
+  //TODO: set navbar title to the title of the current page
+  String title = "title";
+
   return AppBar(
-    title: Text('Movies'),
+    title: Text(title),
     backgroundColor: Colors.orange,
     elevation: 0,
     actions: <Widget>[
@@ -11,9 +14,6 @@ AppBar buildTopNavBar(BuildContext context) {
         icon: Icon(Icons.search),
         iconSize: 50,
         onPressed: () async {
-          //TODO: add popup searchbar
-          
-          //TODO: add search results page, or display widget list of searched buttons? very difficult
           Navigator.pushNamed(context, '/search');
           
         },

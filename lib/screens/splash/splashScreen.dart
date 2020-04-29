@@ -21,6 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return false; //should always return false if firstTimeOpened in sharedpreferences has a value
   }
 
+//TODO: make sure all loading data loads during this screen; currently loading before for some reason
+
 //Load app data for splash screen init
   void loadIntroOrLogin() async {
     print("checking if first time opened...");
@@ -79,7 +81,6 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         Text("Mao Trailer", 
                           style: TextStyle(
-                            //TODO : get fonts
                             color: appTheme().primaryColor,
                           ),
                         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MovieBtn extends StatefulWidget {
-  MovieBtn({Key key}) : super(key: key);
+class LargeMediaBtn extends StatefulWidget {
+  LargeMediaBtn({Key key}) : super(key: key);
 
   @override
-  _MovieBtnState createState() => _MovieBtnState();
+  _LargeMediaBtnState createState() => _LargeMediaBtnState();
 }
 
-class _MovieBtnState extends State<MovieBtn> {
+class _LargeMediaBtnState extends State<LargeMediaBtn> {
   
   final imageUrl = "https://image.tmdb.org/t/p/original/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg";
 
@@ -16,8 +16,7 @@ class _MovieBtnState extends State<MovieBtn> {
     //IconButton with ImageIcon as background
     //get image from TMDb API
     return Container(
-      //TODO: get dimensions from api
-      width: 150,
+      width: double.infinity,
       height: 150,
       decoration: BoxDecoration(border: Border.all(width: 1,)),
       child: IconButton(

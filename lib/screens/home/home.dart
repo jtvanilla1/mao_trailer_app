@@ -14,8 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final AuthService _auth = AuthService();
-
 
   int bottomSelectedIndex = 0;
 
@@ -24,9 +22,9 @@ class _HomeState extends State<Home> {
     keepPage: true,
   );
 
-  Widget buildPageView() {
+  Widget buildPageView(PageController controller) {
     return PageView(
-      controller: pageController,
+      controller: controller,
       onPageChanged: (index) {
         pageChanged(index);
       },
@@ -58,9 +56,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    PageController controller;
     return Scaffold(
       appBar: buildTopNavBar(context),
-      body: buildPageView(),
+      body: buildPageView(controller),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: bottomSelectedIndex,
         backgroundColor: Colors.orange,
