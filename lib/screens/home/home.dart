@@ -58,6 +58,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     PageController controller;
     return Scaffold(
+      //TODO: maybe dont need appbar
       appBar: buildTopNavBar(context),
       body: buildPageView(controller),
       bottomNavigationBar: BottomNavigationBar(
