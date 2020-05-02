@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/components/bottomNavBar.dart';
-import 'package:mao_trailer_app/services/auth.dart';
 
 import 'movies/moviesScreen.dart';
 import 'profile/profileScreen.dart';
 import 'tv/tvScreen.dart';
-import 'components/topNavBar.dart';
 
 class Home extends StatefulWidget {
 
@@ -22,9 +20,9 @@ class _HomeState extends State<Home> {
     keepPage: true,
   );
 
-  Widget buildPageView(PageController controller) {
+  Widget buildPageView() {
     return PageView(
-      controller: controller,
+      controller: pageController,
       onPageChanged: (index) {
         pageChanged(index);
       },
@@ -56,14 +54,13 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    PageController controller;
     return Scaffold(
-      //TODO: maybe dont need appbar
-      appBar: buildTopNavBar(context),
-      body: buildPageView(controller),
+      body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 20,
+        selectedItemColor: Colors.orange,
         currentIndex: bottomSelectedIndex,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.white,
         onTap: (index) {
           bottomTapped(index);
         },

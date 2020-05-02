@@ -4,7 +4,7 @@ List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return [
       BottomNavigationBarItem(
           icon: new Icon(Icons.movie),
-          title: new Text('Movies')
+          title: new Text('Movies'),
       ),
       BottomNavigationBarItem(
         icon: new Icon(Icons.tv),
@@ -12,7 +12,7 @@ List<BottomNavigationBarItem> buildBottomNavBarItems() {
       ),
       BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text('Profile')
+          title: Text('Profile'),
       )
     ];
   }
