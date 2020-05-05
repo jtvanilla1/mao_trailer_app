@@ -22,6 +22,7 @@ dependencies:
   firebase_analytics: ^1.0.4
 
   cloud_firestore: ^0.12.9+4
+  flappy_search_bar: ^1.4.1
 
   provider: ^4.0.5
   google_sign_in: ^3.2.4

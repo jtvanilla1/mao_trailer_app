@@ -1,21 +1,32 @@
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/theme/style.dart';
 
 class SearchResults extends StatelessWidget {
-
   const SearchResults({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appTheme().primaryColorDark,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Search Results'),
-        backgroundColor: appTheme().primaryColor,
+        backgroundColor: Colors.white,
         elevation: 0,
         actions: <Widget>[
-          
-        ]
+          Expanded(
+            child: SafeArea(
+              child: Padding(
+              padding: EdgeInsets.fromLTRB(60, 0, 20, 0),
+              child: SearchBar(onSearch: null, onItemFound: null),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Text("search results go here"),
+        ),
       ),
     );
   }

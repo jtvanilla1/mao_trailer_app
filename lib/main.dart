@@ -13,8 +13,9 @@ import 'routes.dart';
 void main() {
   //status bar color
   //TODO: do this or AnnotatedRegion<SystemUIOverlayStyle>() for main/all widgets?
+  //TODO: change home button colors?
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
+    systemNavigationBarColor: Colors.black,
     statusBarColor: Colors.white,
   ));
   runApp(MyApp());

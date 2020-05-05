@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MediaBtn extends StatefulWidget {
   final int index;
+  //final Movie movie; //pass a Movie object to the button
   MediaBtn({Key key, this.index}) : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class _MediaBtnState extends State<MediaBtn> {
       icon: Icon(Icons.movie),
       onPressed: (){
         print(widget.index);
-        //navigate to corresponding movie page, or generate widget?
+        //build MoviePage widget, pass Movie object to it
       },
     );
   }

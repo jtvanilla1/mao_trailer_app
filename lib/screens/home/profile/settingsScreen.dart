@@ -1,27 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/theme/style.dart';
 
 class SettingsScreen extends StatelessWidget {
   final PageController controller;
   const SettingsScreen({Key key, this.controller}) : super(key: key);
 
+  Widget getCacheSize() {
+    return Text("cache size");
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appTheme().primaryColorDark,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: appTheme().primaryColor,
-        elevation: 0,
-        actions: <Widget>[
-          FlatButton.icon(
-            label: Text('Logout'),
-            icon: Icon(Icons.person),
-            onPressed: () async {
-              
-            },
-          ),
-        ]
+        title: Text("Back"),
+      ),
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            //Setting title
+            Text("Setting"),
+
+            //Clear cache button
+            MaterialButton(
+              elevation: 20,
+              onPressed: (){
+
+              }, 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text("Clear Cache"),
+                  getCacheSize(),
+                ],
+              )
+            ),
+
+            //Spacing
+            SizedBox(height: 20),
+
+            //share, question, about buttons
+            MaterialButton(
+              elevation: 20,
+              onPressed: (){
+
+              }, 
+              child: Text("Share")
+            ),
+            MaterialButton(
+              elevation: 20,
+              onPressed: (){
+
+              }, 
+              child: Text("Give Feedback")
+            ),
+            MaterialButton(
+              elevation: 20,
+              onPressed: (){
+
+              }, 
+              child: Text("About")
+            ),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: MaterialButton(
+              elevation: 20,
+              onPressed: (){
+
+              }, 
+              child: Text("Sign Out")
+            ),
+            )
+            
+          ],
+        ),
       ),
     );
   }
