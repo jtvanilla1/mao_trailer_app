@@ -18,16 +18,3 @@
 
 //Build Movie API parser class that takes each movieId and compiles their various important details as member values, to then be rendered on the widget frontend
 
-// Movie {
-//  String movieID; //passed in from constructor
-//  String movieUrl = "http://api.themoviedb.org/3/movie/$movieId/api_key=$apiKey";
-//  String trailerUrl = "http://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey";
-//  
-//  Map<String,dynamic> map = await getMapFromMovieUrl(movieUrl); //build function
-//  Map<String,dynamic> trailerMap = await getMapFromMovieUrl(trailerUrl); //build function
-
-//  String youtubeKey = trailerMap['key'];
-
-//  Image posterImage = Image.network("https://image.tmdb.org/t/p/original${map['poster_path']}");
-//  String trailerUrl = "https://www.youtube.com/watch?v=$youtubeKey"
-//}

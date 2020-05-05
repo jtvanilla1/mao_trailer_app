@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-Widget buildMediaList(BuildContext context, List<Widget> mediaList) {
+Widget buildMediaGridView(BuildContext context, List<Widget> mediaList) {
   return GridView.builder(
     shrinkWrap: true,
     padding: EdgeInsets.all(15),

@@ -14,15 +14,12 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Back"),
+        title: Text("Settings"),
       ),
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //Setting title
-            Text("Setting"),
-
             //Clear cache button
             MaterialButton(
               elevation: 20,

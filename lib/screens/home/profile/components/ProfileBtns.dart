@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/components/mediaBtn.dart';
-import 'package:mao_trailer_app/screens/home/profile/components/mediaList.dart';
+import 'package:mao_trailer_app/screens/home/profile/components/mediaGridView.dart';
 import 'package:mao_trailer_app/screens/home/profile/components/profileBtnItems.dart';
 import 'package:mao_trailer_app/screens/home/profile/components/toggleBtns.dart';
 
@@ -82,7 +82,7 @@ class _ProfileBtnsState extends State<ProfileBtns> {
         //     ]
         //   ),
         // ),
-        buildMediaList(context, mediaList[0])
+        SizedBox(height: 300, child: buildMediaGridView(context, mediaList[0]))
       ],
     );
   }
