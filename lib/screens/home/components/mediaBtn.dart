@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
+import 'package:mao_trailer_app/screens/home/movies/components/moviePage.dart';
 
 class MediaBtn extends StatefulWidget {
   final int index;
@@ -21,6 +22,9 @@ class _MediaBtnState extends State<MediaBtn> {
         print(widget.index);
         print(widget.movie.originalTitle);
         //build MoviePage widget, pass Movie object to it
+
+        buildMoviePage(context, widget.movie);
+
       },
     );
   }

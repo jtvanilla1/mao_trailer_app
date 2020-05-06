@@ -21,6 +21,7 @@ class Movie {
   // Map<String, dynamic> trailerMap;
   // String youtubeKey;
   Image posterImage;
+  Image backgroundImage;
 
   //constructor: build urls and movie object
   Movie({this.originalTitle, this.overview, this.id, this.posterPath, this.popularity, this.releaseDate}){
@@ -59,20 +60,13 @@ class Movie {
     );
   }
 
-  //display movie
-  Future<List<Movie>> searchMovie(String search) async {
-    await Future.delayed(Duration(seconds: 2));
-    return List.generate(
-      search.length,
-      (int index) {
-        return Post(
-          "Title : $search $index",
-          "Overview : $search $index"
-        );
-      },
-    );
-  }
+  
 }
 
-
-
+//TODO: display movie list
+  Future<List<Movie>> searchMovie(String search) async {
+    //access database of movies
+    await Future.delayed(Duration(seconds: 2));
+    print("searched for $search");
+    return null;
+  }

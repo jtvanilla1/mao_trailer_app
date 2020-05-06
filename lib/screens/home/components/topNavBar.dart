@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-AppBar buildTopNavBar(BuildContext context, int pageNum) {
+SliverAppBar buildTopNavBar(BuildContext context, int pageNum) {
   List<String> titles = ["Movies", "TV Shows", "Profile"];
   List<String> actions = ["/search", "/search", "/settings"];
   List<Icon> icons = [Icon(Icons.search), Icon(Icons.search), Icon(Icons.settings)];
 
-  return AppBar(
+  return SliverAppBar(
+    pinned: true,
+    floating: true,
     title: Text(titles[pageNum], style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
     backgroundColor: Colors.white,
     elevation: 10,

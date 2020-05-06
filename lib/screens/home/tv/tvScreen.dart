@@ -26,44 +26,49 @@ class TvScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            buildTopNavBar(context, 1),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Now",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[600]),
-                        )),
+      body: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          buildTopNavBar(context, 1),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Now",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600]),
+                    ),
                   ),
-                  horizontalMediaListView(nowMediaList),
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Popular",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[600]),
-                        )),
+                ),
+                horizontalMediaListView(nowMediaList),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Popular",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600]),
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  //TODO: fix constraints
+                  height: MediaQuery.of(context).size.height,
+                  child: verticalMediaListView(popularMediaList)
+                ),
+              ],
             ),
-            verticalMediaListView(popularMediaList),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

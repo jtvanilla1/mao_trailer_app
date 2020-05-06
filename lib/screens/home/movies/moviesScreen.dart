@@ -25,48 +25,47 @@ class MoviesScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(shrinkWrap: true, children: <Widget>[
-        Container(
-          child: Column(
-            children: <Widget>[
-              buildTopNavBar(context, 0),
-              Container(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Now",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[600]),
-                          )),
+      body: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          buildTopNavBar(context, 0),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Now",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600]),
                     ),
-                    horizontalMediaListView(nowMediaList),
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Popular",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[600]),
-                          )),
-                    ),
-                    horizontalMediaListView(popularMediaList),
-                    horizontalMediaListView(popularMediaList)
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                horizontalMediaListView(nowMediaList),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Popular",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600]),
+                    ),
+                  ),
+                ),
+                horizontalMediaListView(popularMediaList),
+                horizontalMediaListView(popularMediaList)
+              ],
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

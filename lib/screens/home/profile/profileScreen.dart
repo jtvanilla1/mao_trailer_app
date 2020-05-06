@@ -16,17 +16,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     //TODO: import profile data from server. Firebase for profile details?
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: <Widget>[
-
-            //Title, settings button
-            buildTopNavBar(context, 2),
-
-            //Profile Picture
+      body: CustomScrollView(shrinkWrap: true, slivers: <Widget>[
+        //Title, settings button
+        buildTopNavBar(context, 2),
+        SliverList(
+          delegate: SliverChildListDelegate([
             Container(
               height: 200,
               child: Icon(
@@ -36,14 +33,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
 
             //Name
-            Text("Name"),
+            Text("Name", textAlign: TextAlign.center,),
             SizedBox(height: 20),
 
             ProfileBtns(),
-
-          ]
-        ),
-      )
+          ]),
+        )
+      ]),
     );
   }
 }

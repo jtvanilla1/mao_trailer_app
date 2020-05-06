@@ -21,16 +21,21 @@ class _SearchResultsState extends State<SearchResults> {
       body: Row(
         children: <Widget>[
           //back button
-          IconButton(
-            icon: Icon(Icons.arrow_back), 
-            onPressed: (){
-              Navigator.pop(context);
-            },
+          Container(
+            alignment: Alignment.topLeft,
+            padding: EdgeInsets.fromLTRB(10, 40, 0, 0),
+            child: IconButton(
+              alignment: Alignment.topLeft,
+              icon: Icon(Icons.arrow_back), 
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ),
           //searchbar
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.all(20),
               child: SearchBar<Movie>(
                 onSearch: searchMovie,
                 onItemFound: (Movie movie, int index) {
