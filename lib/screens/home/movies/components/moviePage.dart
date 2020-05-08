@@ -52,7 +52,7 @@ void buildMoviePage(BuildContext context, Movie movie) {
       height: MediaQuery.of(context).size.height * 0.8,
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: MoviePage(movie),
+        child: MoviePage(movie)
       ),
     );
   });
