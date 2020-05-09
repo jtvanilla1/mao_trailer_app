@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
 
 class MediaBtn extends StatefulWidget {
-  final int index;
-  //final Movie movie = Movie(id: "500");
-  //final Movie movie; //pass a Movie object to the button
+  final String id;
   MediaBtn({
     Key key,
-    this.index,
-    /*this.movie*/
+    this.id,
   }) : super(key: key);
 
   @override
@@ -21,7 +18,7 @@ class _MediaBtnState extends State<MediaBtn> {
   @override
   void initState() {
     super.initState();
-    movie = getMovie("76341");
+    movie = getMovie(widget.id);
   }
 
   @override

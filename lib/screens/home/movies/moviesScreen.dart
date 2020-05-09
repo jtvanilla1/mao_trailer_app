@@ -1,23 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:mao_trailer_app/screens/home/components/getMovieIdsList.dart';
 import 'package:mao_trailer_app/screens/home/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/screens/home/components/MediaBtn.dart';
 import 'package:mao_trailer_app/screens/home/components/moreBtn.dart';
 import 'package:mao_trailer_app/screens/home/components/topNavBar.dart';
 
-class MoviesScreen extends StatelessWidget {
+class MoviesScreen extends StatefulWidget {
   final PageController controller;
   const MoviesScreen({Key key, this.controller}) : super(key: key);
 
   @override
+  _MoviesScreenState createState() => _MoviesScreenState();
+}
+
+class _MoviesScreenState extends State<MoviesScreen> {
+  List<String> popIdList = List<String>();
+  List<Widget> nowMediaList = List<Widget>();
+  List<Widget> popularMediaList = List<Widget>();
+
+
+
+  @override
   Widget build(BuildContext context) {
-    List<Widget> nowMediaList = [];
-    List<Widget> popularMediaList = [];
-    for (var i = 0; i < 20; i++) {
+    getPopularMovieIdsList(1).then(
+      (List<String> popids) {
+        setState(() {
+          popIdList = popids;
+        });
+      }
+    );
+
+    for (var i = 0; i < popIdList.length; i++) {
       nowMediaList.add(MediaBtn(
-        index: i,
+        id: popIdList[i],
       ));
       popularMediaList.add(MediaBtn(
-        index: i,
+        id: popIdList[i],
       ));
     }
     nowMediaList.add(MoreBtn());

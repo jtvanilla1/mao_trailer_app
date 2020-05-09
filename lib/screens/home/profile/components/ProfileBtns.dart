@@ -36,9 +36,6 @@ class _ProfileBtnsState extends State<ProfileBtns> {
     commentsList = [];
     mediaNumList = [numLikes, numWatching, numComments];
     mediaList = [likeList, watchingList, commentsList];
-    for (var i = 0; i < 80; i++) {
-      likeList.add(MediaBtn(index: i,));
-    }
   }
 
   @override
@@ -63,25 +60,6 @@ class _ProfileBtnsState extends State<ProfileBtns> {
         //display listview of grids
         //TODO: figure out how to display 
 
-        // Container(
-        //   child: ListView(
-        //     scrollDirection: Axis.horizontal,
-        //     children: <Widget> [
-        //       SizedBox(
-        //         height: 300, 
-        //         child: buildMediaList(context, mediaList[0])
-        //       ),
-        //       SizedBox(
-        //         height: 300, 
-        //         child: buildMediaList(context, mediaList[1])
-        //       ),
-        //       SizedBox(
-        //         height: 300, 
-        //         child: buildMediaList(context, mediaList[2])
-        //       ),
-        //     ]
-        //   ),
-        // ),
         SizedBox(height: 300, child: buildMediaGridView(context, mediaList[0]))
       ],
     );
