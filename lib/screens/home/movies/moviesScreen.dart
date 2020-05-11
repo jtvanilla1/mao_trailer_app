@@ -5,6 +5,14 @@ import 'package:mao_trailer_app/screens/home/components/MediaBtn.dart';
 import 'package:mao_trailer_app/screens/home/components/moreBtn.dart';
 import 'package:mao_trailer_app/screens/home/components/topNavBar.dart';
 
+//top-level values so adding more pages doesnt get reset
+List<String> idList = List<String>();
+List<Widget> nowMediaList = List<Widget>();
+List<Widget> popularMediaList1 = List<Widget>();
+List<Widget> popularMediaList2 = List<Widget>();
+int popularPageNum = 2;
+int nowPageNum = 1;
+
 class MoviesScreen extends StatefulWidget {
   final PageController controller;
   const MoviesScreen({Key key, this.controller}) : super(key: key);
@@ -14,32 +22,67 @@ class MoviesScreen extends StatefulWidget {
 }
 
 class _MoviesScreenState extends State<MoviesScreen> {
-  List<String> popIdList = List<String>();
-  List<Widget> nowMediaList = List<Widget>();
-  List<Widget> popularMediaList = List<Widget>();
+  @override
+  void initState() {
+    super.initState();
 
+    if (idList.isEmpty &&
+        nowMediaList.isEmpty &&
+        popularMediaList1.isEmpty &&
+        popularMediaList2.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        //get list of currently playing movies
+        getMovieIdsList(1, "now_playing").then((List<String> ids) {
+          setState(() {
+            idList = ids;
+            for (var i = 0; i < idList.length; i++) {
+              nowMediaList.add(MediaBtn(
+                id: idList[i],
+              ));
+            }
+            nowMediaList.add(MoreBtn(
+                list: nowMediaList, pagenum: nowPageNum, param: "now_playing"));
+          });
+        });
 
+        //get first of popular movie Ids
+        getMovieIdsList(1, "popular").then((List<String> ids) {
+          setState(() {
+            idList = ids;
+            for (var i = 0; i < idList.length; i++) {
+              popularMediaList1.add(MediaBtn(
+                id: idList[i],
+              ));
+            }
+            popularMediaList1.add(MoreBtn(
+                list: popularMediaList1,
+                pagenum: popularPageNum,
+                param: "popular"));
+          });
+        });
+
+        //get second of popular movie Ids
+        getMovieIdsList(2, "popular").then((List<String> ids) {
+          setState(() {
+            idList = ids;
+            for (var i = 0; i < idList.length; i++) {
+              popularMediaList2.add(MediaBtn(
+                id: idList[i],
+              ));
+            }
+            popularMediaList2.add(MoreBtn(
+                list: popularMediaList2,
+                pagenum: popularPageNum,
+                param: "popular"));
+          });
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    getPopularMovieIdsList(1).then(
-      (List<String> popids) {
-        setState(() {
-          popIdList = popids;
-        });
-      }
-    );
-
-    for (var i = 0; i < popIdList.length; i++) {
-      nowMediaList.add(MediaBtn(
-        id: popIdList[i],
-      ));
-      popularMediaList.add(MediaBtn(
-        id: popIdList[i],
-      ));
-    }
-    nowMediaList.add(MoreBtn());
-    popularMediaList.add(MoreBtn());
+    //build media buttons with movie Ids
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -77,8 +120,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
                     ),
                   ),
                 ),
-                horizontalMediaListView(popularMediaList),
-                horizontalMediaListView(popularMediaList)
+                horizontalMediaListView(popularMediaList1),
+                horizontalMediaListView(popularMediaList2)
               ],
             ),
           ),

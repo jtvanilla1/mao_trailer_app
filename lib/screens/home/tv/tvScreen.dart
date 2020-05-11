@@ -15,31 +15,57 @@ class TvScreen extends StatefulWidget {
 }
 
 class _TvScreenState extends State<TvScreen> {
-  List<String> popIdList = List<String>();
-  List<Widget> nowMediaList = List<Widget>();
-  List<Widget> popularMediaList = List<Widget>();
+  List<String> idList;
+  List<Widget> nowMediaList;
+  List<Widget> popularMediaList1;
+  int popularPageNum;
+  int nowPageNum;
+
+  @override
+  void initState() {
+    super.initState();
+    popularPageNum = 2;
+    nowPageNum = 1;
+
+    idList = List<String>();
+    nowMediaList = List<Widget>();
+    popularMediaList1 = List<Widget>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //get list of currently playing movies
+      getMovieIdsList(1, "now_playing").then((List<String> ids) {
+        setState(() {
+          idList = ids;
+          for (var i = 0; i < idList.length; i++) {
+            nowMediaList.add(MediaBtn(
+              id: idList[i],
+            ));
+          }
+          nowMediaList.add(MoreBtn(
+              list: nowMediaList, pagenum: nowPageNum, param: "now_playing"));
+        });
+      });
+
+      //get first of popular movie Ids
+      getMovieIdsList(1, "popular").then((List<String> ids) {
+        setState(() {
+          idList = ids;
+          for (var i = 0; i < idList.length; i++) {
+            popularMediaList1.add(MediaBtn(
+              id: idList[i],
+            ));
+          }
+          popularMediaList1.add(MoreBtn(
+              list: popularMediaList1,
+              pagenum: popularPageNum,
+              param: "popular"));
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    getPopularMovieIdsList(1).then(
-      (List<String> popids) {
-        setState(() {
-          popIdList = popids;
-        });
-      }
-    );
-
-    for (var i = 0; i < popIdList.length; i++) {
-      nowMediaList.add(MediaBtn(
-        id: popIdList[i],
-      ));
-      popularMediaList.add(MediaBtn(
-        id: popIdList[i],
-      ));
-    }
-    nowMediaList.add(MoreBtn());
-    popularMediaList.add(MoreBtn());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -76,11 +102,8 @@ class _TvScreenState extends State<TvScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  //TODO: fix constraints
-                  height: MediaQuery.of(context).size.height,
-                  child: verticalMediaListView(popularMediaList)
-                ),
+                //TODO: fix scroll so that when top is reached, it scrolls the page up
+                verticalMediaListView(context, popularMediaList1)
               ],
             ),
           ),

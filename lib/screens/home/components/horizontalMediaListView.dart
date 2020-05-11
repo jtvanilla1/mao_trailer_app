@@ -11,9 +11,8 @@ Widget horizontalMediaListView(List<Widget> mediaList) {
           decoration: BoxDecoration(border: Border.all(width: 1)),
           width: 140,
           child: Container(
-            //decoration: BoxDecoration(border: Border.all(width: 1)),
             child: mediaList[index]
-            ),
+          ),
         );
       },
       scrollDirection: Axis.horizontal,

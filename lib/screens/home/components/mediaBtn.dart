@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
 
-class MediaBtn extends StatefulWidget {
+class MediaBtn extends StatelessWidget {
   final String id;
+
   MediaBtn({
     Key key,
     this.id,
   }) : super(key: key);
-
-  @override
-  _MediaBtnState createState() => _MediaBtnState();
-}
-
-class _MediaBtnState extends State<MediaBtn> {
-  Future<Movie> movie;
-
-  @override
-  void initState() {
-    super.initState();
-    movie = getMovie(widget.id);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
+    Future<Movie> movie = getMovie(id);
 
     return FutureBuilder<Movie> (
       future: movie,
@@ -38,6 +28,7 @@ class _MediaBtnState extends State<MediaBtn> {
       },
     );
   }
+
 }
 
 class MovieDisplay extends StatelessWidget {
@@ -48,7 +39,7 @@ class MovieDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: (){
-
+        print(movie.originalTitle);
       },
       child: movie.posterImage,
     );
