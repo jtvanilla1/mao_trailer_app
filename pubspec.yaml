@@ -29,7 +29,7 @@ dependencies:
 
   flutter_signin_button: ^1.0.0
 
-  #tmdb: ^0.0.2-alpha.1
+  youtube_player_flutter: ^6.0.3+2
 
   http: ^0.12.1
 

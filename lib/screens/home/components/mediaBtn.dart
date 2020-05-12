@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
+import 'package:mao_trailer_app/screens/home/movies/components/moviePage.dart';
 
 class MediaBtn extends StatelessWidget {
   final String id;
@@ -40,6 +41,7 @@ class MovieDisplay extends StatelessWidget {
     return MaterialButton(
       onPressed: (){
         print(movie.originalTitle);
+        buildMoviePage(context, movie);
       },
       child: movie.posterImage,
     );

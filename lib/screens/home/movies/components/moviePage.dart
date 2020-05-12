@@ -15,7 +15,7 @@ class MoviePage extends StatelessWidget {
         slivers: <Widget>[
           //transparent appbar with background image
           SliverAppBar(
-            expandedHeight: 400,
+            expandedHeight: 200,
             flexibleSpace: FlexibleSpaceBar(
               background: movie.backgroundImage,
             ),
