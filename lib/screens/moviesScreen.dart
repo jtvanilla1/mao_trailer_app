@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/getMovieIdsList.dart';
-import 'package:mao_trailer_app/screens/home/components/horizontalMediaListView.dart';
-import 'package:mao_trailer_app/screens/home/components/MediaBtn.dart';
-import 'package:mao_trailer_app/screens/home/components/moreBtn.dart';
-import 'package:mao_trailer_app/screens/home/components/topNavBar.dart';
+import 'package:mao_trailer_app/components/getMovieIdsList.dart';
+import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
+import 'package:mao_trailer_app/components/MediaBtn.dart';
+import 'package:mao_trailer_app/components/moreBtn.dart';
+import 'package:mao_trailer_app/components/topNavBar.dart';
 
 //top-level values so adding more pages doesnt get reset
 List<String> idList = List<String>();

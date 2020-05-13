@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/topNavBar.dart';
+import 'package:mao_trailer_app/components/ProfileBtns.dart';
+import 'package:mao_trailer_app/components/topNavBar.dart';
 
-import 'components/ProfileBtns.dart';
 
 class ProfileScreen extends StatefulWidget {
   final PageController controller;

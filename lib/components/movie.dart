@@ -47,8 +47,8 @@ class Movie {
 
   //build movie object from url
   Future<Movie> getMovie(String id) async {
-    String url = "https://api.themoviedb.org/3/movie/$id?api_key=$tmdbKey";
-    String videoUrl = 'https://api.themoviedb.org/3/movie/$id/videos?api_key=$tmdbKey&language=en-US';
+    String url = "https://api.themoviedb.org/3/movie/$id?api_key=$TMDB_KEY";
+    String videoUrl = 'https://api.themoviedb.org/3/movie/$id/videos?api_key=$TMDB_KEY&language=en-US';
     String trailerUrl;
 
     final httpUrl = await http.get(videoUrl);

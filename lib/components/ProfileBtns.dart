@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/mediaBtn.dart';
-import 'package:mao_trailer_app/screens/home/profile/components/mediaGridView.dart';
-import 'package:mao_trailer_app/screens/home/profile/components/profileBtnItems.dart';
-import 'package:mao_trailer_app/screens/home/profile/components/toggleBtns.dart';
+import 'package:mao_trailer_app/components/mediaBtn.dart';
+import 'package:mao_trailer_app/components/mediaGridView.dart';
+import 'package:mao_trailer_app/components/profileBtnItems.dart';
+import 'package:mao_trailer_app/components/toggleBtns.dart';
 
 class ProfileBtns extends StatefulWidget {
   @override

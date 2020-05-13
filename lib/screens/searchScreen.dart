@@ -1,8 +1,8 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/mediaBtn.dart';
-import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
-import 'package:mao_trailer_app/screens/home/profile/components/mediaGridView.dart';
+import 'package:mao_trailer_app/components/mediaBtn.dart';
+import 'package:mao_trailer_app/components/movie.dart';
+import 'package:mao_trailer_app/components/mediaGridView.dart';
 
 class SearchResults extends StatefulWidget {
   const SearchResults({Key key}) : super(key: key);

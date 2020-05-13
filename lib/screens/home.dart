@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/bottomNavBar.dart';
-
-import 'movies/moviesScreen.dart';
-import 'profile/profileScreen.dart';
-import 'tv/tvScreen.dart';
+import 'package:mao_trailer_app/components/bottomNavBar.dart';
+import 'package:mao_trailer_app/components/tvScreen.dart';
+import 'package:mao_trailer_app/screens/moviesScreen.dart';
+import 'package:mao_trailer_app/screens/profileScreen.dart';
 
 class Home extends StatefulWidget {
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
+import 'package:mao_trailer_app/components/movie.dart';
 
 
 class MoviePage extends StatelessWidget {

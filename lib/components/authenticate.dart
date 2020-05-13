@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/authenticate/loginScreen.dart';
-import 'package:mao_trailer_app/screens/authenticate/register.dart';
+import 'package:mao_trailer_app/screens/loginScreen.dart';
+import 'package:mao_trailer_app/components/register.dart';
 
 class Authenticate extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/movies/components/movie.dart';
-import 'package:mao_trailer_app/screens/home/movies/components/moviePage.dart';
+import 'package:mao_trailer_app/components/movie.dart';
+import 'package:mao_trailer_app/screens/movieOverviewScreen.dart';
 
 class MediaBtn extends StatelessWidget {
   final String id;

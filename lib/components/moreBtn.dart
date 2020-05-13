@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/home/components/mediaBtn.dart';
-import 'package:mao_trailer_app/screens/home/components/getMovieIdsList.dart';
+import 'package:mao_trailer_app/components/mediaBtn.dart';
+import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 
 class MoreBtn extends StatefulWidget {
   int pagenum;
