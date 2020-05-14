@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mao_trailer_app/services/keys.dart';
 
 Future<List<String>> getMovieIdsList(int pageNum, String param) async {
-  final String popUrl = "https://api.themoviedb.org/3/movie/$param?api_key=7e999f95b6fe62b9c76d090acb9dcc42&language=en-US&page=$pageNum";
+  final String popUrl = "https://api.themoviedb.org/3/movie/$param?api_key=$TMDB_KEY&language=en-US&page=$pageNum";
 
   List<String> popularMovieIds = List<String>();
 

@@ -1,17 +1,21 @@
+import 'dart:convert';
+
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:mao_trailer_app/components/mediaBtn.dart';
-import 'package:mao_trailer_app/components/movie.dart';
+import 'package:mao_trailer_app/models/movie_model.dart';
 import 'package:mao_trailer_app/components/mediaGridView.dart';
+import 'package:mao_trailer_app/services/keys.dart';
 
-class SearchResults extends StatefulWidget {
-  const SearchResults({Key key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  SearchScreen({Key key}) : super(key: key);
 
   @override
-  _SearchResultsState createState() => _SearchResultsState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchResultsState extends State<SearchResults> {
+class _SearchScreenState extends State<SearchScreen> {
   List<MediaBtn> mediaList;
 
   @override
@@ -57,3 +61,30 @@ class _SearchResultsState extends State<SearchResults> {
     );
   }
 }
+
+
+Future<List<Movie>> searchMovie(String query) async {
+  int pagenum = 1;
+  final String url = "https://api.themoviedb.org/3/search/movie?api_key=$TMDB_KEY&language=en-US&query=$query&page=$pagenum&include_adult=false";
+
+  List<Movie> results = List<Movie>();
+
+  http.Response response = await http.get(url);
+
+  Map<String, dynamic> data = json.decode(response.body);
+  //get movieIds
+  if (response.statusCode == 200) {
+    int numResults = data['results'].length;
+    
+    for (int i = 0; i < numResults; i++) {
+      int id = data['results'][i]['id'];
+      results.add(await getMovie(id.toString()));
+    }
+  } else {
+    throw Exception('Failed to load movies');
+  }
+
+
+  return results;
+}
+

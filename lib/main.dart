@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 //local packages
 import 'services/auth.dart';
 import 'theme/style.dart';
-import 'routes.dart';
+import 'services/routes.dart';
 
 
 void main() {

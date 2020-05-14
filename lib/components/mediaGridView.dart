@@ -19,6 +19,5 @@ Widget buildMediaGridView(BuildContext context, List<Widget> mediaList) {
         child: Container(child: mediaList[index]),
       );
     },
-  
   );
 }

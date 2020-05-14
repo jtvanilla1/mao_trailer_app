@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/movie.dart';
+import 'package:mao_trailer_app/models/movie_model.dart';
 
 class TrailerPlayer extends StatefulWidget {
   final Movie movie;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/bottomNavBar.dart';
-import 'package:mao_trailer_app/components/tvScreen.dart';
+import 'package:mao_trailer_app/screens/tvScreen.dart';
 import 'package:mao_trailer_app/screens/moviesScreen.dart';
 import 'package:mao_trailer_app/screens/profileScreen.dart';
 
