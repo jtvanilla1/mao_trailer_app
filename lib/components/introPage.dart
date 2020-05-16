@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
 import 'package:mao_trailer_app/components/introNextButton.dart';
-import 'package:mao_trailer_app/components/introImagebg.dart';
+import 'package:mao_trailer_app/components/imagebg.dart';
 import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/components/introPageIcons.dart';
 

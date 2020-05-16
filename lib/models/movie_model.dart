@@ -15,7 +15,7 @@ class Movie {
 
   String youtubeId;
   Image posterImage;
-  Image backgroundImage;
+  Image backgroundImage = Image.asset("placeholder.png");
 
   Movie({this.id, Map<String, dynamic> json, this.youtubeId}) {
     this.originalTitle = json['original_title'];
