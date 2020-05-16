@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mao_trailer_app/services/keys.dart';
 
-Future<List<String>> getMovieIdsList(int pageNum, String param) async {
+Future<List<int>> getMovieIdsList(int pageNum, String param) async {
   final String popUrl = "https://api.themoviedb.org/3/movie/$param?api_key=$TMDB_KEY&language=en-US&page=$pageNum";
 
-  List<String> popularMovieIds = List<String>();
+  List<int> popularMovieIds = List<int>();
 
   http.Response popResponse = await http.get(popUrl);
 
@@ -15,7 +15,7 @@ Future<List<String>> getMovieIdsList(int pageNum, String param) async {
     
     for (int i = 0; i < numResults; i++) {
       int id = popData['results'][i]['id'];
-      popularMovieIds.add(id.toString());
+      popularMovieIds.add(id);
     }
   } else {
     throw Exception('Failed to load movies');

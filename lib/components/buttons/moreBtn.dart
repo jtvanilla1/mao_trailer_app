@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/mediaBtn.dart';
+import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
 import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 
 class MoreBtn extends StatefulWidget {
@@ -30,7 +30,7 @@ class _MoreBtnState extends State<MoreBtn> {
         });
 
         //add next api page to the list
-        getMovieIdsList(widget.pagenum, widget.param).then((List<String> ids) {
+        getMovieIdsList(widget.pagenum, widget.param).then((List<int> ids) {
           setState(() {
             for (var i = 0; i < ids.length; i++) {
               widget.list.add(MediaBtn(

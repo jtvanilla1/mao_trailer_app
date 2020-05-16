@@ -8,7 +8,7 @@ Widget horizontalMediaListView(List<Widget> mediaList) {
       itemCount: mediaList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          decoration: BoxDecoration(border: Border.all(width: 1)),
+          //decoration: BoxDecoration(border: Border.all(width: 1)),
           width: 140,
           child: Container(
             child: mediaList[index]

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mao_trailer_app/components/mediaBtn.dart';
+import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
 import 'package:mao_trailer_app/components/mediaGridView.dart';
 import 'package:mao_trailer_app/services/keys.dart';
@@ -78,7 +78,7 @@ Future<List<Movie>> searchMovie(String query) async {
     
     for (int i = 0; i < numResults; i++) {
       int id = data['results'][i]['id'];
-      results.add(await getMovie(id.toString()));
+      results.add(await getMovie(id));
     }
   } else {
     throw Exception('Failed to load movies');

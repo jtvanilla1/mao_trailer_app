@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/ProfileBtns.dart';
+import 'package:mao_trailer_app/components/buttons/ProfileBtns.dart';
 import 'package:mao_trailer_app/components/topNavBar.dart';
 
 

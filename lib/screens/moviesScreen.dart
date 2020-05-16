@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
-import 'package:mao_trailer_app/components/MediaBtn.dart';
-import 'package:mao_trailer_app/components/moreBtn.dart';
+import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
+import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
 import 'package:mao_trailer_app/components/topNavBar.dart';
 
 //top-level values so adding more pages doesnt get reset
-List<String> idList = List<String>();
+List<int> idList = List<int>();
 List<Widget> nowMediaList = List<Widget>();
 List<Widget> popularMediaList1 = List<Widget>();
 List<Widget> popularMediaList2 = List<Widget>();
@@ -32,9 +32,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
         popularMediaList2.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         //get list of currently playing movies
-        getMovieIdsList(1, "now_playing").then((List<String> ids) {
+        getMovieIdsList(1, "now_playing").then((List<int> ids) {
           setState(() {
             idList = ids;
+            print("nowlist: $idList");
             for (var i = 0; i < idList.length; i++) {
               nowMediaList.add(MediaBtn(
                 id: idList[i],
@@ -46,9 +47,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
         });
 
         //get first of popular movie Ids
-        getMovieIdsList(1, "popular").then((List<String> ids) {
+        getMovieIdsList(1, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
+            print("poplist 1: $idList");
             for (var i = 0; i < idList.length; i++) {
               popularMediaList1.add(MediaBtn(
                 id: idList[i],
@@ -62,9 +64,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
         });
 
         //get second of popular movie Ids
-        getMovieIdsList(2, "popular").then((List<String> ids) {
+        getMovieIdsList(2, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
+            print("poplist 2: $idList");
             for (var i = 0; i < idList.length; i++) {
               popularMediaList2.add(MediaBtn(
                 id: idList[i],

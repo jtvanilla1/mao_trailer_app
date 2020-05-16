@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
-import 'package:mao_trailer_app/components/moreBtn.dart';
+import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
 import 'package:mao_trailer_app/components/topNavBar.dart';
 import 'package:mao_trailer_app/components/verticalMediaListView.dart';
-import 'package:mao_trailer_app/components/MediaBtn.dart';
+import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
 
 class TvScreen extends StatefulWidget {
   final PageController controller;
@@ -15,7 +15,7 @@ class TvScreen extends StatefulWidget {
 }
 
 class _TvScreenState extends State<TvScreen> {
-  List<String> idList;
+  List<int> idList;
   List<Widget> nowMediaList;
   List<Widget> popularMediaList1;
   int popularPageNum;
@@ -27,13 +27,13 @@ class _TvScreenState extends State<TvScreen> {
     popularPageNum = 2;
     nowPageNum = 1;
 
-    idList = List<String>();
+    idList = List<int>();
     nowMediaList = List<Widget>();
     popularMediaList1 = List<Widget>();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       //get list of currently playing movies
-      getMovieIdsList(1, "now_playing").then((List<String> ids) {
+      getMovieIdsList(1, "now_playing").then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
@@ -47,7 +47,7 @@ class _TvScreenState extends State<TvScreen> {
       });
 
       //get first of popular movie Ids
-      getMovieIdsList(1, "popular").then((List<String> ids) {
+      getMovieIdsList(1, "popular").then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
