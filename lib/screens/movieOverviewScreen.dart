@@ -23,12 +23,46 @@ class MoviePage extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   //background
-                  //imagebg('placeholder.png'),
-                  movie.backgroundImage,
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: movie.backgroundImage,
+                    ),
+                  ),
 
                   //gradient
                   Container(
                     decoration: gradientbg([Colors.black, Colors.transparent]),
+                  ),
+
+                  //appbar
+                  Container(
+                    padding: EdgeInsets.only(top: 40, left: 10, right: 20),
+                    child: Scaffold(
+                      backgroundColor: Colors.transparent,
+                      appBar: AppBar(
+                        leading: IconButton(
+                            icon: Icon(
+                              Icons.chevron_left,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                        elevation: 0,
+                        backgroundColor: Colors.transparent,
+                        actions: <Widget>[
+                          IconButton(
+                              icon: Icon(Icons.share, color: Colors.white,),
+                              onPressed: () {
+                                print("share button pressed");
+                              })
+                        ],
+                      ),
+                    ),
                   ),
 
                   //Title
