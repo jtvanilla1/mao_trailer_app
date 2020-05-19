@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<FirebaseUser>.value(
       value: AuthService().user,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Mao Trailer',
         theme: appTheme(),
         initialRoute: '/splash',

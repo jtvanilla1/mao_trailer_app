@@ -35,7 +35,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
         getMovieIdsList(1, "now_playing").then((List<int> ids) {
           setState(() {
             idList = ids;
-            print("nowlist: $idList");
             for (var i = 0; i < idList.length; i++) {
               nowMediaList.add(MediaBtn(
                 id: idList[i],
@@ -50,7 +49,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
         getMovieIdsList(1, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
-            print("poplist 1: $idList");
             for (var i = 0; i < idList.length; i++) {
               popularMediaList1.add(MediaBtn(
                 id: idList[i],
@@ -67,7 +65,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
         getMovieIdsList(2, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
-            print("poplist 2: $idList");
             for (var i = 0; i < idList.length; i++) {
               popularMediaList2.add(MediaBtn(
                 id: idList[i],

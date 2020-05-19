@@ -3,7 +3,6 @@ import 'package:mao_trailer_app/components/gradientbg.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
 import 'package:mao_trailer_app/screens/videoScreen.dart';
-import 'package:mao_trailer_app/components/imagebg.dart';
 
 class MoviePage extends StatelessWidget {
   final Movie movie;
@@ -16,18 +15,6 @@ class MoviePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            iconSize: 50,
-            icon: Icon(Icons.chevron_left),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(movie.originalTitle),
-          ),
-        ),
         body: Column(
           children: <Widget>[
             //background image
@@ -36,26 +23,55 @@ class MoviePage extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   //background
-                  imagebg('placeholder.png'),
+                  //imagebg('placeholder.png'),
+                  movie.backgroundImage,
+
                   //gradient
                   Container(
                     decoration: gradientbg([Colors.black, Colors.transparent]),
                   ),
+
+                  //Title
+                  Positioned(
+                    bottom: 5,
+                    left: 140,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: 70,
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text(
+                          movie.originalTitle,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   //play trailer button
-                  Center(
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        icon: Icon(
+                  Positioned(
+                    top: (MediaQuery.of(context).size.width * 0.25),
+                    left: (MediaQuery.of(context).size.width * 0.5) - 20,
+                    child: InkResponse(
+                      onTap: () {
+                        print("share button pressed");
+                        _playTrailer(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Icon(
                           Icons.play_circle_filled,
                           color: Colors.orange,
-                          size: 50,
+                          size: 80,
                         ),
-                        onPressed: () {
-                          print("share button pressed");
-                          _playTrailer(context);
-                        },
                       ),
                     ),
                   ),
@@ -79,25 +95,19 @@ class MoviePage extends StatelessWidget {
                     ),
                   ),
 
-                  //Stats column
+                  //genres
                   Positioned(
-                    top: -50,
+                    top: 10,
                     left: 140,
-                    child: Row(
-                      children: <Widget>[
-                        //title
-                        Text(
-                          movie.originalTitle,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
-                        //genres
-
-                        //popularity
-                        Text(movie.popularity.toString()),
-                      ],
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _getGenresList(movie),
+                          Text("Popularity: ${movie.popularity.toString()}")
+                        ],
+                      ),
                     ),
                   ),
 
@@ -159,6 +169,23 @@ class MoviePage extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+
+  _getGenresList(Movie movie) {
+    List<Widget> list = List<Widget>();
+    for (var i = 0; i < movie.genres.length; i++) {
+      list.add(
+        Text(
+          "-${movie.genres[i]}-",
+          style: TextStyle(fontSize: 12),
+        ),
+      );
+    }
+    return Wrap(
+      runSpacing: 2,
+      spacing: 4,
+      children: list,
     );
   }
 }
