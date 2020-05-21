@@ -18,7 +18,7 @@ class MediaBtn extends StatefulWidget {
 
 class _MediaBtnState extends State<MediaBtn> {
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     widget.movie = getMovie(widget.id);
   }
@@ -36,7 +36,8 @@ class _MediaBtnState extends State<MediaBtn> {
           //return Text(snapshot.requireData.toString());
           return null;
         } else {
-          return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.orange));
+          return CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange));
         }
       },
     );
@@ -45,7 +46,24 @@ class _MediaBtnState extends State<MediaBtn> {
   _buildMovieBtnContent(BuildContext context, Movie movie) {
     return MaterialButton(
       onPressed: () {
-        buildMoviePage(context, movie);
+        showModalBottomSheet<dynamic>(
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext bc) {
+            return Wrap(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: MoviePage(
+                    movie: movie,
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       },
       child: movie.posterImage,
     );

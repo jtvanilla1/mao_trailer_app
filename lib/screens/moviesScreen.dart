@@ -10,6 +10,8 @@ List<int> idList = List<int>();
 List<Widget> nowMediaList = List<Widget>();
 List<Widget> popularMediaList1 = List<Widget>();
 List<Widget> popularMediaList2 = List<Widget>();
+
+//TODO: implement bloc stream for popular pages so that each morebtn increments the same stream
 int popularPageNum = 2;
 int nowPageNum = 1;
 

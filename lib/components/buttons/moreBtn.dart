@@ -37,6 +37,8 @@ class _MoreBtnState extends State<MoreBtn> {
                 id: ids[i],
               ));
             }
+
+            //TODO: bloc call to rebuild state of parent and refresh list
             widget.list.add(MoreBtn(list: widget.list, pagenum: widget.pagenum, param: widget.param));
           });
         });

@@ -23,14 +23,7 @@ class MoviePage extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   //background
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: movie.backgroundImage,
-                    ),
-                  ),
+                  _getBackdrop(context),
 
                   //gradient
                   Container(
@@ -38,77 +31,11 @@ class MoviePage extends StatelessWidget {
                   ),
 
                   //appbar
-                  Container(
-                    padding: EdgeInsets.only(top: 40, left: 10, right: 20),
-                    child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      appBar: AppBar(
-                        leading: IconButton(
-                            icon: Icon(
-                              Icons.chevron_left,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                        elevation: 0,
-                        backgroundColor: Colors.transparent,
-                        actions: <Widget>[
-                          IconButton(
-                              icon: Icon(Icons.share, color: Colors.white,),
-                              onPressed: () {
-                                print("share button pressed");
-                              })
-                        ],
-                      ),
-                    ),
-                  ),
-
+                  _getAppBar(context),
                   //Title
-                  Positioned(
-                    bottom: 5,
-                    left: 140,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      height: 70,
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(
-                          movie.originalTitle,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
-                  ),
-
+                  _getTitle(context),
                   //play trailer button
-                  Positioned(
-                    top: (MediaQuery.of(context).size.width * 0.25),
-                    left: (MediaQuery.of(context).size.width * 0.5) - 20,
-                    child: InkResponse(
-                      onTap: () {
-                        print("share button pressed");
-                        _playTrailer(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Icon(
-                          Icons.play_circle_filled,
-                          color: Colors.orange,
-                          size: 80,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _getTrailerBtn(context),
                 ],
               ),
             ),
@@ -119,44 +46,13 @@ class MoviePage extends StatelessWidget {
                 overflow: Overflow.visible,
                 children: <Widget>[
                   //poster image
-                  Positioned(
-                    top: -80,
-                    left: 20,
-                    child: Container(
-                      height: 150,
-                      width: 100,
-                      child: movie.posterImage,
-                    ),
-                  ),
+                  _getPosterImage(context),
 
-                  //genres
-                  Positioned(
-                    top: 10,
-                    left: 140,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          _getGenresList(movie),
-                          Text("Popularity: ${movie.popularity.toString()}")
-                        ],
-                      ),
-                    ),
-                  ),
+                  //statistics
+                  _getStats(context),
 
                   //overview
-                  Positioned(
-                    left: 20,
-                    right: 20,
-                    top: 80,
-                    child: Container(
-                      child: Text(
-                        movie.overview,
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
+                  _getOverview(context),
                 ],
               ),
             ),
@@ -167,6 +63,61 @@ class MoviePage extends StatelessWidget {
                 child: horizontalMediaListView(castList),
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  _getTitle(BuildContext context) {
+    return Positioned(
+      bottom: 5,
+      left: 140,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        width: MediaQuery.of(context).size.width * 0.6,
+        height: 70,
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Text(
+            movie.originalTitle,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _getAppBar(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 40, left: 10, right: 20),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 40,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.share,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  print("share button pressed");
+                })
           ],
         ),
       ),
@@ -206,6 +157,70 @@ class MoviePage extends StatelessWidget {
     );
   }
 
+  _getBackdrop(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: movie.backgroundImage,
+      ),
+    );
+  }
+
+  _getPosterImage(BuildContext context) {
+    return Positioned(
+      top: -80,
+      left: 20,
+      child: Container(
+        height: 150,
+        width: 100,
+        child: movie.posterImage,
+      ),
+    );
+  }
+
+  _getTrailerBtn(BuildContext context) {
+    return Positioned(
+      top: (MediaQuery.of(context).size.width * 0.25),
+      left: (MediaQuery.of(context).size.width * 0.5) - 20,
+      child: InkResponse(
+        onTap: () {
+          print("share button pressed");
+          _playTrailer(context);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Icon(
+            Icons.play_circle_filled,
+            color: Colors.orange,
+            size: 80,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _getStats(BuildContext context) {
+    return Positioned(
+      top: 10,
+      left: 140,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _getGenresList(movie),
+            Text("Popularity: ${movie.popularity.toString()}")
+          ],
+        ),
+      ),
+    );
+  }
+
   _getGenresList(Movie movie) {
     List<Widget> list = List<Widget>();
     for (var i = 0; i < movie.genres.length; i++) {
@@ -222,24 +237,39 @@ class MoviePage extends StatelessWidget {
       children: list,
     );
   }
+
+  _getOverview(BuildContext context) {
+    return Positioned(
+      left: 20,
+      right: 20,
+      top: 80,
+      child: Container(
+        child: Text(
+          movie.overview,
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+    );
+  }
 }
 
 buildMoviePage(BuildContext context, Movie movie) {
   showModalBottomSheet<dynamic>(
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext bc) {
-        return Wrap(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: MoviePage(
-                movie: movie,
-              ),
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+    context: context,
+    builder: (BuildContext bc) {
+      return Wrap(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: MoviePage(
+              movie: movie,
             ),
-          ],
-        );
-      });
+          ),
+        ],
+      );
+    },
+  );
 }
