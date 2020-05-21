@@ -12,6 +12,8 @@ class _IntroScreenState extends State<IntroScreen> {
     List<String> imageNames = ['intro1.png','intro2.png','intro3.png','placeholder.png'];
     List<String> titles = ['intro1 title','intro2 title','intro3 title','intro4 title'];
 
+    //TODO: list of buttons to add the getStartedBtn?
+
     final controller = PageController(initialPage: 0,);
 
     return PageView(

@@ -24,12 +24,8 @@ class MoviePage extends StatelessWidget {
                 children: <Widget>[
                   //background
                   _getBackdrop(context),
-
                   //gradient
-                  Container(
-                    decoration: gradientbg([Colors.black, Colors.transparent]),
-                  ),
-
+                  _getGradient(context),
                   //appbar
                   _getAppBar(context),
                   //Title
@@ -168,6 +164,12 @@ class MoviePage extends StatelessWidget {
     );
   }
 
+  _getGradient(BuildContext context) {
+    return Container(
+      decoration: gradientbg([Colors.black, Colors.transparent]),
+    );
+  }
+
   _getPosterImage(BuildContext context) {
     return Positioned(
       top: -80,
@@ -251,25 +253,4 @@ class MoviePage extends StatelessWidget {
       ),
     );
   }
-}
-
-buildMoviePage(BuildContext context, Movie movie) {
-  showModalBottomSheet<dynamic>(
-    backgroundColor: Colors.transparent,
-    isScrollControlled: true,
-    context: context,
-    builder: (BuildContext bc) {
-      return Wrap(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: MoviePage(
-              movie: movie,
-            ),
-          ),
-        ],
-      );
-    },
-  );
 }

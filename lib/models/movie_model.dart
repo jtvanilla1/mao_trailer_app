@@ -15,7 +15,7 @@ class Movie {
   String youtubeId;
   Image posterImage;
   Image backgroundImage;
-  String imageBaseUrl = 'https://image.tmdb.org/t/p/original';
+  final imageBaseUrl = 'https://image.tmdb.org/t/p/original';
 
   Movie({this.id, Map<String, dynamic> json, this.youtubeId, String backdropPath}) {
     this.originalTitle = json['original_title'];
@@ -35,7 +35,7 @@ class Movie {
 
 //build movie object from url
 Future<Movie> getMovie(int id) async {
-  String apiBaseUrl = 'https://api.themoviedb.org/3/movie/';
+  const apiBaseUrl = 'https://api.themoviedb.org/3/movie/';
   String videoUrl ='$apiBaseUrl$id/videos?api_key=$TMDB_KEY&language=en-US';
   String backdropUrl = '$apiBaseUrl$id/images?api_key=$TMDB_KEY';
   String movieUrl = "$apiBaseUrl$id?api_key=$TMDB_KEY";
