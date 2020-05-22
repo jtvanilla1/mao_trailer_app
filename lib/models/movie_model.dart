@@ -32,8 +32,10 @@ class Movie {
   }
 
 }
-
+//Move this into the services folder and keep this class clean as possible 
+//==================================================
 //build movie object from url
+//TODO: state management for api calls
 Future<Movie> getMovie(int id) async {
   const apiBaseUrl = 'https://api.themoviedb.org/3/movie/';
   String videoUrl ='$apiBaseUrl$id/videos?api_key=$TMDB_KEY&language=en-US';

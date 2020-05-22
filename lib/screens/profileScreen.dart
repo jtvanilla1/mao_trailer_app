@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/buttons/ProfileBtns.dart';
-import 'package:mao_trailer_app/components/topNavBar.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -20,8 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(shrinkWrap: true, slivers: <Widget>[
-        //Title, settings button
-        buildTopNavBar(context, 2),
         SliverList(
           delegate: SliverChildListDelegate([
             Container(

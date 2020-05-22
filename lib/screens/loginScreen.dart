@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:mao_trailer_app/theme/gradientbg.dart';
 import 'package:mao_trailer_app/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

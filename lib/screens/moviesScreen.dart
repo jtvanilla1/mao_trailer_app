@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
 import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
-import 'package:mao_trailer_app/components/topNavBar.dart';
+import 'package:mao_trailer_app/services/APIService.dart';
 
 //top-level values so adding more pages doesnt get reset
 List<int> idList = List<int>();
@@ -17,7 +16,10 @@ int nowPageNum = 1;
 
 class MoviesScreen extends StatefulWidget {
   final PageController controller;
-  const MoviesScreen({Key key, this.controller}) : super(key: key);
+
+  APIService apiService;
+
+  MoviesScreen({Key key, this.controller}) : super(key: key);
 
   @override
   _MoviesScreenState createState() => _MoviesScreenState();
@@ -34,7 +36,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
         popularMediaList2.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         //get list of currently playing movies
-        getMovieIdsList(1, "now_playing").then((List<int> ids) {
+        //============================
+        //
+        //============================
+        apiService.getMovieIdsList(1, "now_playing").then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -48,7 +53,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
         });
 
         //get first of popular movie Ids
-        getMovieIdsList(1, "popular").then((List<int> ids) {
+        apiService.getMovieIdsList(1, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -64,7 +69,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
         });
 
         //get second of popular movie Ids
-        getMovieIdsList(2, "popular").then((List<int> ids) {
+        apiService.getMovieIdsList(2, "popular").then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -91,7 +96,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
       body: CustomScrollView(
         shrinkWrap: true,
         slivers: <Widget>[
-          buildTopNavBar(context, 0),
           SliverList(
             delegate: SliverChildListDelegate(
               [

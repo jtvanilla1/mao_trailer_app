@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:mao_trailer_app/theme/gradientbg.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
 import 'package:mao_trailer_app/screens/videoScreen.dart';
 
+//Global Context
+class GlobalContext {
+  static BuildContext _context;
+
+  void init(BuildContext context) {
+    _context = context;
+  }
+  static set context(BuildContext value) {
+    _context = value;
+  }
+  static BuildContext get context => _context;
+}
+
+
+//
 class MoviePage extends StatelessWidget {
+  GlobalContext gc = GlobalContext();
+  
   final Movie movie;
   List<Widget> castList = List<Widget>();
 
@@ -65,7 +82,7 @@ class MoviePage extends StatelessWidget {
     );
   }
 
-  _getTitle(BuildContext context) {
+  _getTitle(context) {
     return Positioned(
       bottom: 5,
       left: 140,

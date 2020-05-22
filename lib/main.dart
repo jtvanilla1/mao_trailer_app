@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Mao Trailer',
         theme: appTheme(),
-        initialRoute: '/splash',
+        initialRoute: '/wrap',
         routes: routes,
       ),
     );

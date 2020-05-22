@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
-import 'package:mao_trailer_app/screens/movieOverviewScreen.dart';
+import 'package:mao_trailer_app/screens/moviePage.dart';
 
 class MediaBtn extends StatefulWidget {
   final int id;
@@ -33,7 +32,6 @@ class _MediaBtnState extends State<MediaBtn> {
           return _buildMovieBtnContent(context, snapshot.data);
         } else if (snapshot.hasError) {
           print(snapshot.requireData);
-          //return Text(snapshot.requireData.toString());
           return null;
         } else {
           return CircularProgressIndicator(

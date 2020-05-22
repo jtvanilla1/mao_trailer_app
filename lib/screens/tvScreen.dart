@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/getMovieIdsList.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
-import 'package:mao_trailer_app/components/topNavBar.dart';
 import 'package:mao_trailer_app/components/verticalMediaListView.dart';
 import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
+import 'package:mao_trailer_app/services/APIService.dart';
 
 class TvScreen extends StatefulWidget {
   final PageController controller;
-  const TvScreen({Key key, this.controller}) : super(key: key);
+  APIService apiService;
+  TvScreen({Key key, this.controller}) : super(key: key);
 
   @override
   _TvScreenState createState() => _TvScreenState();
@@ -33,7 +33,7 @@ class _TvScreenState extends State<TvScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       //get list of currently playing movies
-      getMovieIdsList(1, "now_playing").then((List<int> ids) {
+      apiService.getMovieIdsList(1, "now_playing").then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
@@ -47,7 +47,7 @@ class _TvScreenState extends State<TvScreen> {
       });
 
       //get first of popular movie Ids
-      getMovieIdsList(1, "popular").then((List<int> ids) {
+      apiService.getMovieIdsList(1, "popular").then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
@@ -71,7 +71,6 @@ class _TvScreenState extends State<TvScreen> {
       body: CustomScrollView(
         shrinkWrap: true,
         slivers: <Widget>[
-          buildTopNavBar(context, 1),
           SliverList(
             delegate: SliverChildListDelegate(
               [

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/theme/style.dart';
-import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:mao_trailer_app/theme/gradientbg.dart';
 
 class IntroPage extends StatefulWidget {
   final PageController controller;
   final String backgroundImageName;
   final String titleText;
+  final Function button;
 
   const IntroPage(
       {Key key,
       this.controller,
       @required this.backgroundImageName,
-      @required this.titleText})
+      @required this.titleText,
+      @required this.button})
       : super(key: key);
 
   @override
@@ -64,7 +66,7 @@ class _IntroPageState extends State<IntroPage> {
                             SizedBox(
                               height: 20,
                             ), // spacing between icons and
-                            _nextButton(context, widget.controller),
+                            _buildButton(context, widget.controller),
                           ]),
                         ),
                       ),
@@ -80,42 +82,8 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  _nextButton(BuildContext context, PageController controller) {
-    return Container(
-      margin: const EdgeInsets.all(30.0),
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(width: 2, color: appTheme().primaryColor),
-        borderRadius: BorderRadius.all(
-          Radius.circular(30.0),
-        ),
-      ),
-      child: RawMaterialButton(
-        onPressed: () {
-          print("navigating to next page");
-          //Navigator.pushReplacementNamed(context, '$route');
-          controller.nextPage(
-              duration: Duration(milliseconds: 500), curve: Curves.ease);
-        },
-        child: Row(
-          children: <Widget>[
-            Text(
-              "Next Page",
-              style: TextStyle(
-                color: appTheme().primaryColor,
-                fontSize: 20,
-              ),
-            ),
-            Icon(
-              Icons.play_arrow,
-              color: appTheme().primaryColor,
-              size: 35,
-            ),
-          ],
-        ),
-        elevation: 2.0,
-      ),
-    );
+  _buildButton(BuildContext context, PageController controller){
+    return widget.button(context, controller);
   }
 
   _imagebg(String imageName) {
@@ -164,42 +132,6 @@ class _IntroPageState extends State<IntroPage> {
           size: 30.0,
         ),
       ],
-    );
-  }
-
-  //TODO: put this in the program somewhere
-  _getStartedButton(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(30.0),
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        gradient:
-            LinearGradient(colors: [Color(0xFFF99F00), Color(0xFFDB3069)]),
-        border: Border.all(
-          width: 2,
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(30.0),
-        ),
-      ),
-      child: RawMaterialButton(
-        onPressed: () {
-          print("navigating to wrapper");
-          Navigator.pushReplacementNamed(context, '/wrap');
-        },
-        child: Row(
-          children: <Widget>[
-            Text(
-              "       Get Started       ",
-              style: TextStyle(
-                color: appTheme().primaryColor,
-                fontSize: 20,
-              ),
-            ),
-          ],
-        ),
-        elevation: 2.0,
-      ),
     );
   }
 }

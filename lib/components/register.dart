@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/gradientbg.dart';
+import 'package:mao_trailer_app/theme/gradientbg.dart';
 import 'package:mao_trailer_app/services/auth.dart';
 
 class Register extends StatefulWidget {

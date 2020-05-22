@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
-import 'package:mao_trailer_app/components/mediaGridView.dart';
-import 'package:mao_trailer_app/components/buttons/profileBtnItems.dart';
-import 'package:mao_trailer_app/components/buttons/toggleBtns.dart';
 
 class ProfileBtns extends StatefulWidget {
   @override
@@ -10,61 +7,48 @@ class ProfileBtns extends StatefulWidget {
 }
 
 class _ProfileBtnsState extends State<ProfileBtns> {
-  List<bool> isSelected;
-  int buttonIndex;
-  int numLikes;
-  int numWatching;
-  int numComments;
-  List<Widget> likeList;
-  List<Widget> watchingList;
-  List<Widget> commentsList;
-  List<int> mediaNumList;
-  List<List<Widget>> mediaList;
-
-
+  int numFavorites;
+  List<Widget> favoritesList;
 
   @override
   void initState() {
     super.initState();
-    isSelected = [true, false, false];
-    buttonIndex = 0;
-    numLikes = 3210;
-    numWatching = 1232;
-    numComments = 44;
-    likeList = [];
-    watchingList = [];
-    commentsList = [];
-    mediaNumList = [numLikes, numWatching, numComments];
-    mediaList = [likeList, watchingList, commentsList];
+    //TODO: init favorites list with database or something
+    favoritesList = [];
+
+    numFavorites = favoritesList.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       children: <Widget>[
         //control buttons
-        Center(
-          child: ToggleButtons(
-            children: buildProfileBtnItems(isSelected, mediaNumList),
-            onPressed: (int index) {
-              //switch to new button selected
-              setState(() => toggleBtns(isSelected, index));
-              //scroll to next pageview of gridviews
-            },
-            isSelected: isSelected,
-          ),
-        ),
-        SizedBox(height: 10),
 
         //display listview of grids
-        //TODO: figure out how to display 
-
-        SizedBox(height: 300, child: buildMediaGridView(context, mediaList[0]))
+        _buildFavoritesGridView(context, favoritesList)
       ],
     );
   }
+
+  _buildFavoritesGridView(BuildContext context, List<Widget> favoritesList) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.all(15),
+      itemCount: favoritesList.length,
+      primary: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 1.5)),
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          decoration: BoxDecoration(border: Border.all(width: 1)),
+          child: Container(child: favoritesList[index]),
+        );
+      },
+    );
+  }
 }
-
-
-  
