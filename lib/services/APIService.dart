@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:mao_trailer_app/models/movie_model.dart';
+import 'package:mao_trailer_app/services/MovieService.dart';
 import 'package:mao_trailer_app/services/keys.dart';
 
 class APIService {
+  MovieService movieService = MovieService();
   
   Future<List<Movie>> searchMovie(String query) async {
     int pagenum = 1;
@@ -22,7 +24,7 @@ class APIService {
 
       for (int i = 0; i < numResults; i++) {
         int id = data['results'][i]['id'];
-        results.add(await getMovie(id));
+        results.add(await movieService.getMovie(id));
       }
     } else {
       throw Exception('Failed to load movies');

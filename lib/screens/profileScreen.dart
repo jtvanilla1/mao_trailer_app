@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/buttons/ProfileBtns.dart';
+import 'package:mao_trailer_app/services/auth.dart';
 
 
 class ProfileScreen extends StatefulWidget {
+  final AuthService _auth = AuthService();
   final PageController controller;
 
-  const ProfileScreen({Key key, this.controller}) : super(key: key);
+  ProfileScreen({Key key, this.controller}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -21,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: CustomScrollView(shrinkWrap: true, slivers: <Widget>[
         SliverList(
           delegate: SliverChildListDelegate([
+            IconButton(icon: Icon(Icons.exit_to_app), onPressed: widget._auth.signOut),
             Container(
               height: 200,
               child: Icon(

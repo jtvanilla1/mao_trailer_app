@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
 import 'package:mao_trailer_app/screens/moviePage.dart';
+import 'package:mao_trailer_app/services/MovieService.dart';
 
 class MediaBtn extends StatefulWidget {
   final int id;
+  MovieService movieService;
   Future<Movie> movie;
 
   MediaBtn({
@@ -19,7 +21,8 @@ class _MediaBtnState extends State<MediaBtn> {
   @override
   void initState() {
     super.initState();
-    widget.movie = getMovie(widget.id);
+    widget.movieService = MovieService();
+    widget.movie = widget.movieService.getMovie(widget.id);
   }
 
   @override
