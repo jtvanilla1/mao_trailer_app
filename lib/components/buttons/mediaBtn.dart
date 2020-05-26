@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/models/movie_model.dart';
+import 'package:mao_trailer_app/models/tvShow_model.dart';
 import 'package:mao_trailer_app/screens/moviePage.dart';
 import 'package:mao_trailer_app/services/MovieService.dart';
 
@@ -67,6 +68,32 @@ class _MediaBtnState extends State<MediaBtn> {
         );
       },
       child: movie.posterImage,
+    );
+  }
+
+  _buildTvShowBtnContent(BuildContext context, TvShow tvShow) {
+    return MaterialButton(
+      onPressed: () {
+        showModalBottomSheet<dynamic>(
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext bc) {
+            return Wrap(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: TvPage(
+                    show: tvShow,
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: tvShow.posterImage,
     );
   }
 }

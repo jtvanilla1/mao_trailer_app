@@ -33,11 +33,9 @@ class APIService {
     return results;
   }
 
-  Future<List<int>> getMovieIdsList(int pageNum, String param) async {
-    final String popUrl =
-        "https://api.themoviedb.org/3/movie/$param?api_key=$TMDB_KEY&language=en-US&page=$pageNum";
-
-    List<int> popularMovieIds = List<int>();
+  Future<List<int>> getIdsList({String mediaType, int pageNum, String params}) async {
+    final String popUrl = "https://api.themoviedb.org/3/discover/$mediaType?api_key=$TMDB_KEY&$params&page=$pageNum&";
+    List<int> ids = List<int>();
 
     http.Response popResponse = await http.get(popUrl);
 
@@ -47,12 +45,25 @@ class APIService {
 
       for (int i = 0; i < numResults; i++) {
         int id = popData['results'][i]['id'];
-        popularMovieIds.add(id);
+        ids.add(id);
+        if(mediaType=='tv'){
+          print(id);
+        }
       }
     } else {
       throw Exception('Failed to load movies');
     }
-    return popularMovieIds;
+    return ids;
+  }
+
+  Future<Map<String, dynamic>> getDataFromUrl(String url) async {
+    http.Response response = await http.get(url);
+    Map<String, dynamic> data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      return data;
+    } else {
+      throw Exception(response.statusCode);
+    }
   }
 }
 

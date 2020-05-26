@@ -110,7 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         )),
                     _buildSignInBtn(),
-                    _buildSignInWithGoogleBtn(),
                     _buildRegisterBtn(),
                   ],
                 ),
@@ -330,27 +329,6 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(15.0),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
-      ),
-    );
-  }
-
-  Widget _buildSignInWithGoogleBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 15.0),
-      width: double.infinity,
-      child: SignInButton(
-        Buttons.Google,
-        onPressed: () async {
-          dynamic result = await _auth.googleSignIn();
-          print('Google result: $result');
-          if (result == null) {
-            setState(() => error =
-                'please supply a valid email/password that has not already been registered');
-          }
-        },
-        padding: EdgeInsets.all(15.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
     );
   }

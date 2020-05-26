@@ -13,11 +13,16 @@ List<Widget> popularMediaList2 = List<Widget>();
 //TODO: implement bloc stream for popular pages so that each morebtn increments the same stream
 int popularPageNum = 2;
 int nowPageNum = 1;
+String currentYear = DateTime.now().year.toString();
+String params =
+    'language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
+String currentParams = params + '&primary_release_year=$currentYear';
 
 class MoviesScreen extends StatefulWidget {
   final PageController controller;
-
-  APIService apiService;
+  String currentYear;
+  String params;
+  String currentParams;
 
   MoviesScreen({Key key, this.controller}) : super(key: key);
 
@@ -29,6 +34,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
   @override
   void initState() {
     super.initState();
+    currentYear = DateTime.now().year.toString();
+    params = 'language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
+    currentParams = params + '&primary_release_year=$currentYear';
 
     if (idList.isEmpty &&
         nowMediaList.isEmpty &&
@@ -39,7 +47,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
         //============================
         //
         //============================
-        apiService.getMovieIdsList(1, "now_playing").then((List<int> ids) {
+        apiService
+            .getIdsList(mediaType: 'movie', pageNum: 1, params: currentParams)
+            .then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -47,13 +57,14 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 id: idList[i],
               ));
             }
-            nowMediaList.add(MoreBtn(
-                list: nowMediaList, pagenum: nowPageNum, param: "now_playing"));
+            
           });
         });
 
         //get first of popular movie Ids
-        apiService.getMovieIdsList(1, "popular").then((List<int> ids) {
+        apiService
+            .getIdsList(mediaType: 'movie', pageNum: 1, params: params)
+            .then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -61,15 +72,13 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 id: idList[i],
               ));
             }
-            popularMediaList1.add(MoreBtn(
-                list: popularMediaList1,
-                pagenum: popularPageNum,
-                param: "popular"));
           });
         });
 
         //get second of popular movie Ids
-        apiService.getMovieIdsList(2, "popular").then((List<int> ids) {
+        apiService
+            .getIdsList(mediaType: 'movie', pageNum: 2, params: params)
+            .then((List<int> ids) {
           setState(() {
             idList = ids;
             for (var i = 0; i < idList.length; i++) {
@@ -77,10 +86,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 id: idList[i],
               ));
             }
-            popularMediaList2.add(MoreBtn(
-                list: popularMediaList2,
-                pagenum: popularPageNum,
-                param: "popular"));
+            
           });
         });
       });

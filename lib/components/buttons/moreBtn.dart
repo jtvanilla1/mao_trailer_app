@@ -3,11 +3,11 @@ import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
 import 'package:mao_trailer_app/services/APIService.dart';
 
 class MoreBtn extends StatefulWidget {
-  APIService apiService;
   int pagenum;
   String param;
+  String mediaType;
   List<Widget> list;
-  MoreBtn({Key key, @required this.pagenum, @required this.list, @required this.param}) : super(key: key);
+  MoreBtn({Key key, @required this.mediaType, @required this.pagenum, @required this.list, @required this.param}) : super(key: key);
 
   @override
   _MoreBtnState createState() => _MoreBtnState();
@@ -21,28 +21,7 @@ class _MoreBtnState extends State<MoreBtn> {
       onPressed: () {
         print("More button pressed");
 
-        setState(() {
-          print(widget.pagenum);
-          //increment pagenum
-          widget.pagenum++;
-
-          //pop this button off the list
-          widget.list.removeLast();
-        });
-
-        //add next api page to the list
-        apiService.getMovieIdsList(widget.pagenum, widget.param).then((List<int> ids) {
-          setState(() {
-            for (var i = 0; i < ids.length; i++) {
-              widget.list.add(MediaBtn(
-                id: ids[i],
-              ));
-            }
-
-            //TODO: bloc call to rebuild state of parent and refresh list
-            widget.list.add(MoreBtn(list: widget.list, pagenum: widget.pagenum, param: widget.param));
-          });
-        });
+        //TODO: properly display new items in list
       },
       child: Text("More"),
     );

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mao_trailer_app/services/auth.dart';
 
 class SettingsScreen extends StatelessWidget {
   final PageController controller;
-  const SettingsScreen({Key key, this.controller}) : super(key: key);
+  final AuthService _auth = AuthService();
+  SettingsScreen({Key key, this.controller}) : super(key: key);
 
   Widget getCacheSize() {
     return Text("cache size");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,56 +23,42 @@ class SettingsScreen extends StatelessWidget {
           children: <Widget>[
             //Clear cache button
             MaterialButton(
-              elevation: 20,
-              onPressed: (){
-
-              }, 
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text("Clear Cache"),
-                  getCacheSize(),
-                ],
-              )
-            ),
+                elevation: 20,
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Clear Cache"),
+                    getCacheSize(),
+                  ],
+                )),
 
             //Spacing
             SizedBox(height: 20),
 
             //share, question, about buttons
             MaterialButton(
-              elevation: 20,
-              onPressed: (){
-
-              }, 
-              child: Text("Share")
-            ),
+                elevation: 20, onPressed: () {}, child: Text("Share")),
             MaterialButton(
-              elevation: 20,
-              onPressed: (){
-
-              }, 
-              child: Text("Give Feedback")
-            ),
+                elevation: 20, onPressed: () {}, child: Text("Give Feedback")),
             MaterialButton(
-              elevation: 20,
-              onPressed: (){
-
-              }, 
-              child: Text("About")
-            ),
+                elevation: 20, onPressed: () {}, child: Text("About")),
 
             Align(
               alignment: Alignment.bottomCenter,
               child: MaterialButton(
-              elevation: 20,
-              onPressed: (){
-
-              }, 
-              child: Text("Sign Out")
-            ),
+                  elevation: 20,
+                  onPressed: () {},
+                  child: MaterialButton(
+                    child: Text("Sign Out"),
+                    onPressed: () {
+                      //TODO: CHECK IF THIS IS A MEMORY LEAK
+                      _auth.signOut();
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/wrap');
+                    },
+                  )),
             )
-            
           ],
         ),
       ),

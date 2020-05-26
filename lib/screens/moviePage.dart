@@ -172,6 +172,7 @@ class MoviePage extends StatelessWidget {
 
   _getBackdrop(BuildContext context) {
     return Container(
+      color: Colors.black,
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: FittedBox(

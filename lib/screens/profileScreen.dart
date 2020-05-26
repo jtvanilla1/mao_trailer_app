@@ -23,7 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: CustomScrollView(shrinkWrap: true, slivers: <Widget>[
         SliverList(
           delegate: SliverChildListDelegate([
-            IconButton(icon: Icon(Icons.exit_to_app), onPressed: widget._auth.signOut),
             Container(
               height: 200,
               child: Icon(

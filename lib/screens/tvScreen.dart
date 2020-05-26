@@ -7,7 +7,8 @@ import 'package:mao_trailer_app/services/APIService.dart';
 
 class TvScreen extends StatefulWidget {
   final PageController controller;
-  APIService apiService;
+
+  String currentYear = DateTime.now().year.toString();
   TvScreen({Key key, this.controller}) : super(key: key);
 
   @override
@@ -20,20 +21,31 @@ class _TvScreenState extends State<TvScreen> {
   List<Widget> popularMediaList1;
   int popularPageNum;
   int nowPageNum;
+  String currentYear;
+  String params;
+  String currentParams;
 
   @override
   void initState() {
     super.initState();
     popularPageNum = 2;
     nowPageNum = 1;
+    currentYear = DateTime.now().year.toString();
+    params = 'language=en-US&sort_by=popularity.desc&timezone=America&include_null_first_air_dates=false';
+    //currentParams = params + '&primary_release_year=$currentYear';
 
     idList = List<int>();
     nowMediaList = List<Widget>();
     popularMediaList1 = List<Widget>();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      //get list of currently playing movies
-      apiService.getMovieIdsList(1, "now_playing").then((List<int> ids) {
+      //get list of currently playing tv
+      apiService
+          .getIdsList(
+              mediaType: 'tv',
+              pageNum: 1,
+              params: params)
+          .then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
@@ -41,13 +53,13 @@ class _TvScreenState extends State<TvScreen> {
               id: idList[i],
             ));
           }
-          nowMediaList.add(MoreBtn(
-              list: nowMediaList, pagenum: nowPageNum, param: "now_playing"));
         });
       });
 
-      //get first of popular movie Ids
-      apiService.getMovieIdsList(1, "popular").then((List<int> ids) {
+      //get first of popular tv Ids
+      apiService
+          .getIdsList(mediaType: 'tv', pageNum: 1, params: params)
+          .then((List<int> ids) {
         setState(() {
           idList = ids;
           for (var i = 0; i < idList.length; i++) {
@@ -55,10 +67,6 @@ class _TvScreenState extends State<TvScreen> {
               id: idList[i],
             ));
           }
-          popularMediaList1.add(MoreBtn(
-              list: popularMediaList1,
-              pagenum: popularPageNum,
-              param: "popular"));
         });
       });
     });
@@ -69,6 +77,7 @@ class _TvScreenState extends State<TvScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
+        scrollDirection: Axis.vertical,
         shrinkWrap: true,
         slivers: <Widget>[
           SliverList(
@@ -102,7 +111,7 @@ class _TvScreenState extends State<TvScreen> {
                   ),
                 ),
                 //TODO: fix scroll so that when top is reached, it scrolls the page up
-                verticalMediaListView(context, popularMediaList1)
+                verticalMediaListView(context, popularMediaList1),
               ],
             ),
           ),

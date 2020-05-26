@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/components/register.dart';
+import 'package:mao_trailer_app/screens/registerScreen.dart';
 import 'package:mao_trailer_app/screens/loginScreen.dart';
 
 class Authenticate extends StatefulWidget {
