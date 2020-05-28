@@ -8,6 +8,7 @@ class MediaBtn extends StatefulWidget {
   final int id;
   MovieService movieService;
   Future<Movie> movie;
+  //TODO: add TV support, or create new button; probably the latter
 
   MediaBtn({
     Key key,
