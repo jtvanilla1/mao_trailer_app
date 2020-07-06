@@ -39,7 +39,7 @@ class _MediaBtnState extends State<MediaBtn> {
           return null;
         } else {
           return CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange));
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[300]));
         }
       },
     );

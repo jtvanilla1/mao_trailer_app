@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
       },
       children: <Widget>[
         MoviesScreen(),
-        ProfileScreen(),
+        // ProfileScreen(),
       ],
     );
   }
@@ -57,31 +57,31 @@ class _HomeState extends State<Home> {
         );
   }
 
-  _buildBottomNavBar() {
-    return BottomNavigationBar(
-      elevation: 20,
-      selectedItemColor: Colors.blue[300],
-      currentIndex: bottomSelectedIndex,
-      backgroundColor: Colors.white,
-      onTap: (index) {
-        bottomTapped(index);
-      },
-      items: _bottomNavBarItems(),
-    );
-  }
+  // _buildBottomNavBar() {
+  //   return BottomNavigationBar(
+  //     elevation: 20,
+  //     selectedItemColor: Colors.blue[300],
+  //     currentIndex: bottomSelectedIndex,
+  //     backgroundColor: Colors.white,
+  //     onTap: (index) {
+  //       bottomTapped(index);
+  //     },
+  //     items: _bottomNavBarItems(),
+  //   );
+  // }
 
-  _bottomNavBarItems() {
-    return [
-      BottomNavigationBarItem(
-        icon: new Icon(Icons.movie),
-        title: new Text('Movies'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        title: Text('Profile'),
-      )
-    ];
-  }
+  // _bottomNavBarItems() {
+  //   return [
+  //     BottomNavigationBarItem(
+  //       icon: new Icon(Icons.movie),
+  //       title: new Text('Movies'),
+  //     ),
+  //     BottomNavigationBarItem(
+  //       icon: Icon(Icons.person),
+  //       title: Text('Profile'),
+  //     )
+  //   ];
+  // }
 
   _buildTopNavBar(BuildContext context, int pageNum) {
     List<String> titles = ["Movies", "Profile"];

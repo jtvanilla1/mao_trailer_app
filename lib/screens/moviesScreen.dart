@@ -104,7 +104,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(15),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -118,7 +118,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 ),
                 horizontalMediaListView(nowMediaList),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(15),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
