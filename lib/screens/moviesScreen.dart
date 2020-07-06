@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/horizontalMediaListView.dart';
 import 'package:mao_trailer_app/components/buttons/mediaBtn.dart';
-import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
+//import 'package:mao_trailer_app/components/buttons/moreBtn.dart';
 import 'package:mao_trailer_app/services/APIService.dart';
 
 //top-level values so adding more pages doesnt get reset
@@ -10,7 +10,6 @@ List<Widget> nowMediaList = List<Widget>();
 List<Widget> popularMediaList1 = List<Widget>();
 List<Widget> popularMediaList2 = List<Widget>();
 
-//TODO: implement bloc stream for popular pages so that each morebtn increments the same stream
 int popularPageNum = 2;
 int nowPageNum = 1;
 String currentYear = DateTime.now().year.toString();
@@ -35,7 +34,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
   void initState() {
     super.initState();
     currentYear = DateTime.now().year.toString();
-    params = 'language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
+    params =
+        'language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false';
     currentParams = params + '&primary_release_year=$currentYear';
 
     if (idList.isEmpty &&
@@ -57,7 +57,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 id: idList[i],
               ));
             }
-            
           });
         });
 
@@ -86,7 +85,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 id: idList[i],
               ));
             }
-            
           });
         });
       });
@@ -110,7 +108,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Now",
+                      "Recently Released",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

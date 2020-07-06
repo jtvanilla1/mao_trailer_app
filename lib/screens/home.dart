@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/screens/tvScreen.dart';
 import 'package:mao_trailer_app/screens/moviesScreen.dart';
 import 'package:mao_trailer_app/screens/profileScreen.dart';
 
@@ -24,7 +23,6 @@ class _HomeState extends State<Home> {
       },
       children: <Widget>[
         MoviesScreen(),
-        TvScreen(),
         ProfileScreen(),
       ],
     );
@@ -54,14 +52,15 @@ class _HomeState extends State<Home> {
     return Scaffold(
         //TODO: build array of titles, and widgets and build appbar based on index
         appBar: _buildTopNavBar(context, bottomSelectedIndex),
-        body: buildPageView(),
-        bottomNavigationBar: _buildBottomNavBar());
+        body: buildPageView()
+        //bottomNavigationBar: _buildBottomNavBar());
+        );
   }
 
   _buildBottomNavBar() {
     return BottomNavigationBar(
       elevation: 20,
-      selectedItemColor: Colors.orange,
+      selectedItemColor: Colors.blue[300],
       currentIndex: bottomSelectedIndex,
       backgroundColor: Colors.white,
       onTap: (index) {
@@ -78,10 +77,6 @@ class _HomeState extends State<Home> {
         title: new Text('Movies'),
       ),
       BottomNavigationBarItem(
-        icon: new Icon(Icons.tv),
-        title: new Text('TV'),
-      ),
-      BottomNavigationBarItem(
         icon: Icon(Icons.person),
         title: Text('Profile'),
       )
@@ -89,8 +84,8 @@ class _HomeState extends State<Home> {
   }
 
   _buildTopNavBar(BuildContext context, int pageNum) {
-    List<String> titles = ["Movies", "TV Shows", "Profile"];
-    List<String> actions = ["/search", "/search", "/settings"];
+    List<String> titles = ["Movies", "Profile"];
+    List<String> actions = ["/search", "/settings"];
     List<Icon> icons = [
       Icon(Icons.search),
       Icon(Icons.search),

@@ -7,7 +7,7 @@ ThemeData appTheme() {
     hintColor: Colors.white,
     dividerColor: Colors.white,
     buttonColor: Colors.white,
-    scaffoldBackgroundColor: Colors.orange[600],
+    scaffoldBackgroundColor: Colors.blue[300],
     canvasColor: Colors.black,
   );
 }

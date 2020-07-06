@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mao_trailer_app/components/buttons/ProfileBtns.dart';
-import 'package:mao_trailer_app/services/auth.dart';
-
 
 class ProfileScreen extends StatefulWidget {
-  final AuthService _auth = AuthService();
   final PageController controller;
 
   ProfileScreen({Key key, this.controller}) : super(key: key);
@@ -32,7 +29,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
 
             //Name
-            Text("Name", textAlign: TextAlign.center,),
+            Text(
+              "Name",
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 20),
 
             ProfileBtns(),

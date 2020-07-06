@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mao_trailer_app/services/auth.dart';
 
 class SettingsScreen extends StatelessWidget {
   final PageController controller;
-  final AuthService _auth = AuthService();
   SettingsScreen({Key key, this.controller}) : super(key: key);
 
   Widget getCacheSize() {
@@ -52,8 +50,6 @@ class SettingsScreen extends StatelessWidget {
                   child: MaterialButton(
                     child: Text("Sign Out"),
                     onPressed: () {
-                      //TODO: CHECK IF THIS IS A MEMORY LEAK
-                      _auth.signOut();
                       Navigator.pop(context);
                       Navigator.pushReplacementNamed(context, '/wrap');
                     },

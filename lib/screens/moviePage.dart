@@ -11,17 +11,18 @@ class GlobalContext {
   void init(BuildContext context) {
     _context = context;
   }
+
   static set context(BuildContext value) {
     _context = value;
   }
+
   static BuildContext get context => _context;
 }
-
 
 //
 class MoviePage extends StatelessWidget {
   GlobalContext gc = GlobalContext();
-  
+
   final Movie movie;
   List<Widget> castList = List<Widget>();
 
@@ -216,7 +217,7 @@ class MoviePage extends StatelessWidget {
           ),
           child: Icon(
             Icons.play_circle_filled,
-            color: Colors.orange,
+            color: Colors.blue[300],
             size: 80,
           ),
         ),
